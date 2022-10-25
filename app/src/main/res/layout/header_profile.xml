@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image_iv"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:src="@drawable/profile_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/rating_profile_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle"
+            android:gravity="center"
+            android:lineSpacingExtra="-5sp"
+            android:textAppearance="@style/rating_text_style"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/profile_image_iv"
+            tools:text="4.7" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/profile_nickname_tv"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:lineSpacingExtra="2sp"
+        android:textAppearance="@style/profile_nickname_style"
+        android:translationY="-1.11sp"
+        tools:text="Alice Peterson" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginTop="12dp">
+
+        <ImageView
+            android:id="@+id/language_icon_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:contentDescription="@string/language_icon_description"
+            android:gravity="center"
+            android:src="@drawable/language_icon" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/language_values_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_weight="1f"
+            android:gravity="start|center"
+            android:lineSpacingExtra="1sp"
+            android:textAppearance="@style/choice_text"
+            android:translationY="-0.53sp"
+            tools:text="Russian, English, German" />
+
+        <Button
+            android:id="@+id/language_choose_btn"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chose_text_button"
+            android:textColor="@color/text_button_color" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginTop="12dp">
+
+        <ImageView
+            android:id="@+id/geolocation_icon_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:contentDescription="@string/language_icon_description"
+            android:gravity="center"
+            android:src="@drawable/geolocation_icon" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/geolocation_values_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_weight="1f"
+            android:gravity="start|center"
+            android:lineSpacingExtra="1sp"
+            android:textAppearance="@style/choice_text"
+            android:translationY="-0.53sp"
+            tools:text="New York city, USA" />
+
+        <Button
+            android:id="@+id/geolocation_choose_btn"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chose_text_button"
+            android:textColor="@color/text_button_color" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

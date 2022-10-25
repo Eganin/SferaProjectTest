@@ -7,19 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:background="@color/background_color">
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".MainActivity"
         android:background="@color/background_color">
 
         <include
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_toolbar"
             layout="@layout/toolbar_profile"/>
 
+        <include
+            android:id="@+id/main_header_profile"
+            layout="@layout/header_profile"/>
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>
