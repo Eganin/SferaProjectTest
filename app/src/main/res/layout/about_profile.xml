@@ -5,14 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_images_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/extra_small_margin"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_marginEnd="@dimen/default_margin"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="4"
@@ -21,38 +22,27 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/default_margin"
         android:layout_marginTop="@dimen/big_margin">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/questionnaires_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            style="@style/BorderedButtonStyle"
             android:layout_weight="1"
-            android:lineSpacingExtra="-1sp"
             android:paddingVertical="10dp"
-            android:text="@string/questionnaires"
-            android:textSize="@dimen/small_sp"
-            app:backgroundTint="@color/btn_background"
-            app:cornerRadius="4dp"
-            app:strokeColor="@color/secondary_color"
-            app:strokeWidth="1dp" />
+            android:text="@string/questionnaires" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/people_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginStart="@dimen/extra_small_margin"
+            style="@style/BorderedButtonStyle"
             android:layout_weight="1"
-            android:lineSpacingExtra="-1sp"
             android:paddingVertical="10dp"
-            android:text="@string/people"
-            android:textSize="@dimen/small_sp"
-            app:backgroundTint="@color/btn_background"
-            app:cornerRadius="4dp"
-            app:strokeColor="@color/secondary_color"
-            app:strokeWidth="1dp" />
+            android:text="@string/people" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -81,15 +71,17 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:gravity="center"
+        android:layout_marginHorizontal="@dimen/default_margin"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="@dimen/big_margin"
+        android:layout_marginTop="@dimen/extra_small_margin"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:fontFamily="@font/inter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_weight="1"
             android:lineSpacingExtra="5sp"
             android:text="@string/dream_and_get"
@@ -98,27 +90,20 @@
 
         <androidx.appcompat.widget.SwitchCompat
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_height="wrap_content" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <com.google.android.material.button.MaterialButton
+        style="@style/BorderedButtonStyle"
         android:id="@+id/wishes_btn"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:lineSpacingExtra="-1sp"
-        android:gravity="center_horizontal|top"
-        android:padding="@dimen/default_margin"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/small_margin"
+        android:layout_height="wrap_content"
+
+        android:layout_marginHorizontal="@dimen/default_margin"
         android:layout_weight="1"
-        android:paddingVertical="10dp"
+        android:paddingVertical="@dimen/default_margin"
         android:text="@string/wishes"
-        android:textSize="@dimen/small_sp"
-        app:backgroundTint="@color/btn_background"
-        app:cornerRadius="4dp"
-        app:strokeColor="@color/secondary_color"
-        app:strokeWidth="1dp" />
+        />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingStart="@dimen/default_margin"
     android:background="@color/background_color"
     android:orientation="vertical">
 
@@ -20,15 +21,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
+            android:textAppearance="@style/RatingTitleStyle"
             android:id="@+id/rating_profile_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/circle"
             android:gravity="center"
-            android:lineSpacingExtra="-5sp"
-            android:textSize="@dimen/rating_sp"
-            android:letterSpacing="-0.04"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/profile_image_iv"
             tools:text="4.7" />
@@ -40,43 +39,36 @@
         android:layout_height="24dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginHorizontal="@dimen/default_margin"
         android:layout_marginTop="@dimen/small_margin"
         android:gravity="center"
-        android:lineSpacingExtra="2sp"
-        android:textSize="@dimen/title_sp"
-        android:letterSpacing="-0.03"
-        android:translationY="-1.11sp"
+        android:textAppearance="@style/TitleStyle"
         tools:text="Alice Peterson" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="42dp"
+        android:gravity="center"
         android:layout_marginTop="@dimen/small_margin">
 
         <ImageView
             android:id="@+id/language_icon_iv"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_height="wrap_content"
             android:contentDescription="@string/language_icon_description"
-            android:gravity="center"
             android:src="@drawable/language_icon" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:layout_marginStart="@dimen/default_margin"
             android:id="@+id/language_values_tv"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="start|center"
-            android:lineSpacingExtra="1sp"
-            android:textSize="@dimen/small_sp"
-            android:letterSpacing="-0.02"
-            android:translationY="-0.53sp"
+            android:gravity="start"
+            android:textAppearance="@style/ProfileValuesTextStyle"
             tools:text="Russian, English, German" />
 
         <Button
+            android:textAppearance="@style/ChooseIconText"
             android:id="@+id/language_choose_btn"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
@@ -87,32 +79,29 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:layout_marginTop="@dimen/small_margin">
+        android:layout_height="42dp">
 
         <ImageView
             android:id="@+id/geolocation_icon_iv"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:contentDescription="@string/language_icon_description"
-            android:gravity="center"
             android:src="@drawable/geolocation_icon" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:layout_marginStart="@dimen/default_margin"
+            android:textAppearance="@style/ProfileValuesTextStyle"
             android:id="@+id/geolocation_values_tv"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:layout_weight="1"
             android:gravity="start|center"
-            android:lineSpacingExtra="1sp"
-            android:textSize="@dimen/small_sp"
-            android:letterSpacing="-0.02"
-            android:translationY="-0.53sp"
             tools:text="New York city, USA" />
 
         <Button
+            android:textAppearance="@style/ChooseIconText"
             android:id="@+id/geolocation_choose_btn"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"

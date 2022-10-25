@@ -9,5 +9,7 @@
     <dimen name="small_sp">14sp</dimen>
     <dimen name="big_margin">24dp</dimen>
     <dimen name="list_margin">10dp</dimen>
-    <dimen name="chronicies_margin">18dp</dimen>
+    <dimen name="recycler_view_margin">18dp</dimen>
+    <dimen name="image_chronicies_margin">5dp</dimen>
+    <dimen name="image_rv_default_margin">4dp</dimen>
 </resources>
