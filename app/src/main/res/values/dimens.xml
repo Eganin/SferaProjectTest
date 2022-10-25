@@ -8,4 +8,6 @@
     <dimen name="extra_small_margin">8dp</dimen>
     <dimen name="small_sp">14sp</dimen>
     <dimen name="big_margin">24dp</dimen>
+    <dimen name="list_margin">10dp</dimen>
+    <dimen name="chronicies_margin">18dp</dimen>
 </resources>

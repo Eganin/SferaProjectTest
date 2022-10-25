@@ -2,7 +2,7 @@
 <androidx.appcompat.widget.AppCompatImageView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="79dp"
-    android:layout_height="105dp"
+    android:layout_height="140dp"
     android:scaleType="centerCrop"
     android:clipToOutline="true"
     android:layout_marginStart="4dp"

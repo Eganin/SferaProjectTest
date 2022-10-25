@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background_color"
     tools:context=".MainActivity">
 
@@ -27,5 +28,51 @@
             android:id="@+id/main_about_profile"
             layout="@layout/about_profile" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:gravity="start"
+            android:lineSpacingExtra="1sp"
+            android:translationY="-0.53sp"
+            android:textSize="@dimen/small_sp"
+            android:textColor="@color/secondary_color"
+            android:id="@+id/moments_label_tv"
+            android:text="@string/moments"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/image_for_moments"
+            android:layout_marginTop="@dimen/list_margin"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_marginTop="@dimen/chronicies_margin"
+            android:gravity="start"
+            android:lineSpacingExtra="1sp"
+            android:translationY="-0.53sp"
+            android:textSize="@dimen/small_sp"
+            android:textColor="@color/secondary_color"
+            android:id="@+id/chronicies_label_tv"
+            android:text="@string/chronicies"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:orientation="horizontal"
+            tools:itemCount="9"
+            app:spanCount="3"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            tools:listitem="@layout/image_for_chronicies"
+            android:layout_marginTop="@dimen/list_margin"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
+
 </ScrollView>
