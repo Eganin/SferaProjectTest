@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SferaProjectTest</string>
+    <string name="test_id">ID 123 456 789</string>
 </resources>
