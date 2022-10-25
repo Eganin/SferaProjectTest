@@ -3,4 +3,10 @@
     <string name="test_id">ID 123 456 789</string>
     <string name="language_icon_description">Language icon</string>
     <string name="chose_text_button">Choose</string>
+    <string name="questionnaires">QUESTIONNAIRES</string>
+    <string name="people">PEOPLE</string>
+    <string name="about_me_hint">About me</string>
+    <string name="test_edit_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit</string>
+    <string name="dream_and_get">Dream and get</string>
+    <string name="wishes">WISHES</string>
 </resources>

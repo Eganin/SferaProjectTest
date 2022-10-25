@@ -9,5 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background_color">#121212</color>
     <color name="text_color">#DEFFFFFF</color>
-    <color name="text_button_color">#9575CD</color>
+    <color name="hint_color">#99FFFFFF</color>
+    <color name="secondary_color">#9575CD</color>
+    <color name="secondary_variant_color">#9575CD</color>
+    <color name="btn_background">#272727</color>
 </resources>

@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@color/background_color">
+    android:background="@color/background_color"
+    tools:context=".MainActivity">
+
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".MainActivity"
-        android:background="@color/background_color">
+        android:background="@color/background_color"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
 
         <include
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/main_toolbar"
-            layout="@layout/toolbar_profile"/>
+            layout="@layout/toolbar_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <include
             android:id="@+id/main_header_profile"
-            layout="@layout/header_profile"/>
+            layout="@layout/header_profile" />
+
+        <include
+            android:id="@+id/main_about_profile"
+            layout="@layout/about_profile" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>

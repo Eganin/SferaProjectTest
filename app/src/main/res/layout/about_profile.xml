@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_images_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/extra_small_margin"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="4"
+        tools:listitem="@layout/image_for_profile" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/big_margin">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/questionnaires_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:lineSpacingExtra="-1sp"
+            android:paddingVertical="10dp"
+            android:text="@string/questionnaires"
+            android:textSize="@dimen/small_sp"
+            app:backgroundTint="@color/btn_background"
+            app:cornerRadius="4dp"
+            app:strokeColor="@color/secondary_color"
+            app:strokeWidth="1dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/people_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/extra_small_margin"
+            android:layout_weight="1"
+            android:lineSpacingExtra="-1sp"
+            android:paddingVertical="10dp"
+            android:text="@string/people"
+            android:textSize="@dimen/small_sp"
+            app:backgroundTint="@color/btn_background"
+            app:cornerRadius="4dp"
+            app:strokeColor="@color/secondary_color"
+            app:strokeWidth="1dp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/extra_small_margin"
+        android:hint="@string/about_me_hint"
+        android:textColorHint="@color/hint_color"
+        app:boxStrokeColor="@color/hint_color"
+        app:counterEnabled="true"
+        app:counterMaxLength="300"
+        app:counterTextColor="@color/hint_color"
+        app:hintTextColor="@color/hint_color">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/about_me_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_color"
+            android:inputType="textMultiLine"
+            android:textColor="@color/text_color"
+            app:counterMaxLength="300"
+            tools:text="@string/test_edit_text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="@dimen/big_margin"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:lineSpacingExtra="5sp"
+            android:text="@string/dream_and_get"
+            android:textSize="16sp"
+            android:translationY="-2.32sp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/wishes_btn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:lineSpacingExtra="-1sp"
+        android:gravity="center_horizontal|top"
+        android:padding="@dimen/default_margin"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_weight="1"
+        android:paddingVertical="10dp"
+        android:text="@string/wishes"
+        android:textSize="@dimen/small_sp"
+        app:backgroundTint="@color/btn_background"
+        app:cornerRadius="4dp"
+        app:strokeColor="@color/secondary_color"
+        app:strokeWidth="1dp" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

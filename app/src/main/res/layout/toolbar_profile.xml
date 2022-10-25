@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.appbar.MaterialToolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolbar_profile"
@@ -23,11 +24,12 @@
             android:id="@+id/id_profile_tv"
             android:layout_width="125dp"
             android:layout_height="24dp"
-            android:layout_marginStart="35dp"
-            android:layout_weight="1f"
+            android:layout_marginStart="@dimen/id_text_margin_start"
+            android:layout_weight="1"
             android:gravity="top"
             android:lineSpacingExtra="2sp"
-            android:textAppearance="@style/id_text_style"
+            android:textSize="@dimen/title_sp"
+            android:letterSpacing="-0.03"
             android:translationY="-1.11sp"
             tools:text="@string/test_id" />
 
@@ -36,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/default_margin"
-            android:alpha="0.6f"
+            android:alpha="0.6"
             android:src="@drawable/share_icon" />
     </androidx.appcompat.widget.LinearLayoutCompat>
-</androidx.appcompat.widget.Toolbar>
+</com.google.android.material.appbar.MaterialToolbar>
