@@ -24,7 +24,7 @@
         android:layout_marginTop="@dimen/list_margin"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="4"
+        tools:itemCount="5"
         tools:listitem="@layout/image_for_moments" />
 
     <androidx.appcompat.widget.AppCompatTextView

@@ -1,40 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.appbar.MaterialToolbar xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolbar_profile"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/background_color"
-    android:minHeight="?attr/actionBarSize"
-    app:titleTextColor="@color/text_color">
+    android:textAppearance="@style/TitleStyle"
+    android:minHeight="?attr/actionBarSize">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/menu_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/menu_icon" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/id_profile_tv"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:background="@color/background_color"
+            android:id="@+id/topAppBar"
+            app:titleTextAppearance="@style/TitleStyle"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:textAppearance="@style/TitleStyle"
-            android:layout_marginStart="@dimen/id_text_margin_start"
-            android:layout_weight="1"
-            android:gravity="top"
-            tools:text="@string/test_id" />
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/top_app_bar"
+            app:navigationIcon="@drawable/menu_icon"
+            tools:title="@string/test_id" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/share_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:alpha="0.6"
-            android:src="@drawable/share_icon" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
-</com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
