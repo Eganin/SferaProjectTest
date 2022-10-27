@@ -3,14 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="79dp"
     android:layout_height="105dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginStart="@dimen/image_rv_default_margin"
     app:cardCornerRadius="4dp">
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_profile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/image_for_profile"
-        android:background="@drawable/image_for_profile"
+        tools:background="@drawable/image_for_profile"
         android:clipToOutline="true"
         android:scaleType="center">
 

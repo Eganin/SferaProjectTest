@@ -1,8 +1,9 @@
-package com.best.sferaprojecttest
+package com.best.sferaprojecttest.presentation.screens
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
+import com.best.sferaprojecttest.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

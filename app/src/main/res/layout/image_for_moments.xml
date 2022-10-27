@@ -7,6 +7,7 @@
     app:cardCornerRadius="4dp">
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_moment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/moments_image"

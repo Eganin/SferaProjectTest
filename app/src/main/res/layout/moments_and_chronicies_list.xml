@@ -18,6 +18,7 @@
         android:textColor="@color/secondary_color" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/moments_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/small_margin"
@@ -38,6 +39,7 @@
         android:textColor="@color/secondary_color" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chronicies_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/small_margin"

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background_color">#121212</color>
@@ -8,5 +8,5 @@
     <color name="secondary_color">#9575CD</color>
     <color name="primary_color">#272727</color>
     <color name="error_color">#CF6679</color>
-
+    <color name="textinput_box_stroke_color" tools:override="true">@color/hint_color</color>
 </resources>
