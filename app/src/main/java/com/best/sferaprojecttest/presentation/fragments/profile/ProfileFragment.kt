@@ -12,6 +12,7 @@ import com.best.sferaprojecttest.domain.models.ImageForList
 import com.best.sferaprojecttest.presentation.fragments.adapters.ChroniciesAdapter
 import com.best.sferaprojecttest.presentation.fragments.adapters.MomentsAdapter
 import com.best.sferaprojecttest.presentation.fragments.adapters.ProfileImagesAdapter
+import com.bumptech.glide.Glide
 
 class ProfileFragment : Fragment(R.layout.profile_fragment) {
 
@@ -39,6 +40,14 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
 
     private fun setupViews() {
         setupRecyclerViews()
+        Glide
+            .with(requireContext())
+            .load("https://i.pinimg.com/736x/7e/ce/c4/7ecec434137d1fcbe023db38e06c1260.jpg")
+            .into(binding.mainHeaderProfile.profileImageIv)
+        binding.mainHeaderProfile.ratingProfileTv.text= "5.0"
+        binding.mainHeaderProfile.profileNicknameTv.text = "Eren Jager"
+        binding.mainHeaderProfile.languageValuesTv.text = "English, Japanese"
+        binding.mainHeaderProfile.geolocationValuesTv.text ="Paradise"
     }
 
     private fun setupRecyclerViews() {
@@ -55,14 +64,12 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
                 ImageForList(link = "https://i.pinimg.com/736x/7e/ce/c4/7ecec434137d1fcbe023db38e06c1260.jpg"),
                 ImageForList(link = "https://cloudfront-us-east-1.images.arcpublishing.com/gruporepublica/3SJFG4PNVZCTPEFICIMBX3GBNI.jpg"),
                 ImageForList(link = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAOx2RPl8fc_NYxNNpuFM26XqTphDKOrVVzw&usqp=CAU"),
-                ImageForList(link = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAOx2RPl8fc_NYxNNpuFM26XqTphDKOrVVzw&usqp=CAU"),
                 ImageForList(link = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_SBzlRLLwDLMkPqQpgiwwAXru6zTv9TgllJBx1YtV3K7Em9AZ1maJ9PbmLKxwZxEcTWw&usqp=CAU"),
             ).toMutableList()
 
         val listImagesForChronicies =
             listOf(
                 ImageForList(link = "https://i.pinimg.com/736x/7e/ce/c4/7ecec434137d1fcbe023db38e06c1260.jpg"),
-                ImageForList(link = "https://cloudfront-us-east-1.images.arcpublishing.com/gruporepublica/3SJFG4PNVZCTPEFICIMBX3GBNI.jpg"),
                 ImageForList(link = "https://cloudfront-us-east-1.images.arcpublishing.com/gruporepublica/3SJFG4PNVZCTPEFICIMBX3GBNI.jpg"),
                 ImageForList(link = "https://cloudfront-us-east-1.images.arcpublishing.com/gruporepublica/3SJFG4PNVZCTPEFICIMBX3GBNI.jpg"),
                 ImageForList(link = "https://cloudfront-us-east-1.images.arcpublishing.com/gruporepublica/3SJFG4PNVZCTPEFICIMBX3GBNI.jpg"),
