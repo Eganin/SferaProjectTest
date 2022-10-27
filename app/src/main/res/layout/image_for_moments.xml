@@ -11,6 +11,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/moments_image"
         android:clipToOutline="true"
+        android:contentDescription="@string/image_for_moments"
         android:scaleType="center">
 
     </androidx.appcompat.widget.AppCompatImageView>

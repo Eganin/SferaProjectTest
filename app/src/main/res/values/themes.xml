@@ -2,17 +2,18 @@
     <!-- Base application theme. -->
     <style name="Theme.SferaProjectTest" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@android:color/black</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorPrimaryVariant">@color/primary_color</item>
+        <item name="colorOnPrimary">@color/on_primary_color</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/secondary_color</item>
         <item name="colorSecondaryVariant">@color/secondary_color</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@android:color/black</item>
-        <item name="android:textColor">@color/text_color</item>
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:textColor">@color/on_primary_color</item>
         <!-- Customize your theme here. -->
+        <item name="colorOnBackground">@color/on_primary_color</item>
     </style>
 
     <style name="TitleStyle">
@@ -51,8 +52,8 @@
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra"> -1sp</item>
         <item name="android:fontFamily">@font/inter</item>
-        <item name="android:textColor">@color/text_color</item>
-        <item name="backgroundTint">@color/btn_background</item>
+        <item name="android:textColor">@color/on_primary_color</item>
+        <item name="backgroundTint">@color/primary_color</item>
         <item name="cornerRadius">4dp</item>
         <item name="strokeColor">@color/secondary_color</item>
         <item name="strokeWidth">1dp</item>

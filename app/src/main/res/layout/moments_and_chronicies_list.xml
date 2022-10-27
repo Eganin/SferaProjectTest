@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/default_margin"
-        android:layout_marginTop="@dimen/recycler_view_margin"
+        android:layout_marginTop="@dimen/recycler_view_top_margin"
         android:text="@string/moments"
         android:textAppearance="@style/ListLabelText"
         android:textColor="@color/secondary_color" />
@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/default_margin"
-        android:layout_marginTop="@dimen/recycler_view_margin"
+        android:layout_marginTop="@dimen/recycler_view_top_margin"
         android:text="@string/chronicies"
         android:textAppearance="@style/ListLabelText"
         android:textColor="@color/secondary_color" />

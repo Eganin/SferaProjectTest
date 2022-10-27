@@ -2,15 +2,68 @@
     <!-- Base application theme. -->
     <style name="Theme.SferaProjectTest" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorPrimaryVariant">@color/primary_color</item>
+        <item name="colorOnPrimary">@color/on_primary_color</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorSecondary">@color/secondary_color</item>
+        <item name="colorSecondaryVariant">@color/secondary_color</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:textColor">@color/on_primary_color</item>
         <!-- Customize your theme here. -->
+        <item name="colorOnBackground">@color/on_primary_color</item>
+    </style>
+
+    <style name="TitleStyle">
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:letterSpacing">-0.03</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:translationY">-1.11sp</item>
+    </style>
+
+    <style name="RatingTitleStyle">
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:letterSpacing">-0.04</item>
+        <item name="android:lineSpacingExtra">-5sp</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="ProfileValuesTextStyle">
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:lineSpacingExtra">1sp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:translationY">-0.53sp</item>
+    </style>
+
+    <style name="ChooseIconText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:textColor">@color/secondary_color</item>
+        <item name="android:lineSpacingExtra">1sp</item>
+        <item name="android:translationY">-0.53sp</item>
+        <item name="android:fontFamily">@font/inter</item>
+    </style>
+
+    <style name="BorderedButtonStyle" parent="TextAppearance.AppCompat.Widget.Button">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra"> -1sp</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:textColor">@color/on_primary_color</item>
+        <item name="backgroundTint">@color/primary_color</item>
+        <item name="cornerRadius">4dp</item>
+        <item name="strokeColor">@color/secondary_color</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <style name="ListLabelText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/secondary_color</item>
+        <item name="android:lineSpacingExtra">1sp</item>
+        <item name="android:translationY"> -0.53sp</item>
+        <item name="android:fontFamily">@font/inter</item>
     </style>
 </resources>

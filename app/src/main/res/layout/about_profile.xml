@@ -47,24 +47,26 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:enabled="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/extra_small_margin"
+        app:boxBackgroundColor="@color/hint_color"
         android:hint="@string/about_me_hint"
         android:textColorHint="@color/hint_color"
-        app:boxStrokeColor="@color/hint_color"
         app:counterEnabled="true"
         app:counterMaxLength="300"
         app:counterTextColor="@color/hint_color"
         app:hintTextColor="@color/hint_color">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:shadowColor="@color/hint_color"
             android:id="@+id/about_me_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/background_color"
             android:inputType="textMultiLine"
-            android:textColor="@color/text_color"
+            android:textColor="@color/on_primary_color"
             app:counterMaxLength="300"
             tools:text="@string/test_edit_text" />
 
@@ -99,9 +101,7 @@
         android:id="@+id/wishes_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_marginHorizontal="@dimen/default_margin"
-        android:layout_weight="1"
         android:paddingVertical="@dimen/default_margin"
         android:text="@string/wishes"
         />
