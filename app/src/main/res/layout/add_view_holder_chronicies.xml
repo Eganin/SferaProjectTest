@@ -24,7 +24,7 @@
             android:clipToOutline="true"
             android:contentDescription="@string/image_for_profile"
             android:scaleType="centerCrop"
-            tools:background="@drawable/chronicies_image">
+            android:src="@drawable/add">
 
         </androidx.appcompat.widget.AppCompatImageView>
 
