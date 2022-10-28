@@ -8,6 +8,6 @@
     <color name="secondary_color">#9575CD</color>
     <color name="primary_color">#272727</color>
     <color name="error_color">#CF6679</color>
-    <color name="textinput_box_stroke_color" override="true">@color/hint_color</color>
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#9AFFFFFF</color>
     <color name="add_background">#1E1E1E</color>
 </resources>

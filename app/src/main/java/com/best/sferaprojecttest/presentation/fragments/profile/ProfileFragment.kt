@@ -45,6 +45,7 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
             .load("https://i.pinimg.com/736x/7e/ce/c4/7ecec434137d1fcbe023db38e06c1260.jpg")
             .into(binding.mainHeaderProfile.profileImageIv)
         binding.mainHeaderProfile.ratingProfileTv.text= "5.0"
+        binding.mainToolbar.topAppBar.title =getString(R.string.test_id)
         binding.mainHeaderProfile.profileNicknameTv.text = "Eren Jager"
         binding.mainHeaderProfile.languageValuesTv.text = "English, Japanese"
         binding.mainHeaderProfile.geolocationValuesTv.text ="Paradise"
