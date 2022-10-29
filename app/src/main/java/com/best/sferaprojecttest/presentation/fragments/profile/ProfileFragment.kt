@@ -43,12 +43,12 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
         Glide
             .with(requireContext())
             .load("https://i.pinimg.com/736x/7e/ce/c4/7ecec434137d1fcbe023db38e06c1260.jpg")
-            .into(binding.mainHeaderProfile.profileImageIv)
-        binding.mainHeaderProfile.ratingProfileTv.text= "5.0"
+            .into(binding.profileImageIv)
+        binding.ratingProfileTv.text= "5.0"
         binding.mainToolbar.topAppBar.title =getString(R.string.test_id)
-        binding.mainHeaderProfile.profileNicknameTv.text = "Eren Jager"
-        binding.mainHeaderProfile.languageValuesTv.text = "English, Japanese"
-        binding.mainHeaderProfile.geolocationValuesTv.text ="Paradise"
+        binding.profileNicknameTv.text = "Eren Jager"
+        binding.languageValuesTv.text = "English, Japanese"
+        binding.geolocationValuesTv.text ="Paradise"
     }
 
     private fun setupRecyclerViews() {
@@ -83,16 +83,16 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
         //create and setup Profile adapter
         adapterProfile = ProfileImagesAdapter()
         adapterProfile.setList(list = listImagesForProfile)
-        binding.mainAboutProfile.listImagesProfile.adapter = adapterProfile
+        binding.listImagesProfile.adapter = adapterProfile
 
         //create and setup Moments adapter
         adapterMoments = MomentsAdapter()
         adapterMoments.setList(list = listImagesForMoments)
-        binding.mainLists.momentsRv.adapter = adapterMoments
+        binding.momentsRv.adapter = adapterMoments
 
         //create and setup chronicies adapter
         adapterChronices = ChroniciesAdapter()
         adapterChronices.setList(list = listImagesForChronicies)
-        binding.mainLists.chroniciesRv.adapter = adapterChronices
+        binding.chroniciesRv.adapter = adapterChronices
     }
 }

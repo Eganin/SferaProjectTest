@@ -7,27 +7,18 @@
     android:layout_marginStart="@dimen/image_chronicies_margin"
     android:layout_marginTop="@dimen/image_chronicies_margin">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_chronicies"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/image_for_profile"
+        android:scaleType="centerCrop"
         app:cardCornerRadius="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_chronicies"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToOutline="true"
-            android:contentDescription="@string/image_for_profile"
-            android:scaleType="centerCrop"
-            tools:background="@drawable/chronicies_image">
-
-        </androidx.appcompat.widget.AppCompatImageView>
-
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@drawable/chronicies_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

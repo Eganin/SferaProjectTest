@@ -1,48 +1,309 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/profile_fragment"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <include
+        android:id="@+id/main_toolbar"
+        layout="@layout/toolbar_profile" />
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background_color"
-        android:backgroundTint="@color/hint_color"
-        android:orientation="vertical">
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <include
-            android:id="@+id/main_toolbar"
-            layout="@layout/toolbar_profile" />
-
-        <ScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none">
+            android:background="@color/background_color"
+            android:orientation="vertical">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image_iv"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_marginHorizontal="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/profile_image" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/rating_profile_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/circle"
+                android:gravity="center"
+                android:textAppearance="@style/RatingTitleStyle"
+                app:layout_constraintBottom_toBottomOf="@id/profile_image_iv"
+                app:layout_constraintStart_toStartOf="@id/profile_image_iv"
+                tools:text="4.7" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/profile_nickname_tv"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginHorizontal="@dimen/default_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:gravity="center"
+                android:textAppearance="@style/TitleStyle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rating_profile_tv"
+                tools:text="Alice Peterson" />
+
+            <ImageView
+                android:id="@+id/language_icon_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:contentDescription="@string/language_icon_description"
+                android:src="@drawable/language_icon"
+                app:layout_constraintBottom_toBottomOf="@id/language_choose_btn"
+                app:layout_constraintEnd_toStartOf="@id/language_values_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_nickname_tv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/language_values_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:textAppearance="@style/ProfileValuesTextStyle"
+                app:layout_constraintBottom_toBottomOf="@id/language_choose_btn"
+                app:layout_constraintStart_toEndOf="@id/language_icon_iv"
+                app:layout_constraintTop_toBottomOf="@id/profile_nickname_tv"
+                tools:text="Russian, English, German" />
+
+            <Button
+                android:id="@+id/language_choose_btn"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginTop="@dimen/small_margin"
+                android:text="@string/chose_text_button"
+                android:textAppearance="@style/ChooseIconText"
+                android:textColor="@color/secondary_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_nickname_tv" />
+
+            <ImageView
+                android:id="@+id/geolocation_icon_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:contentDescription="@string/language_icon_description"
+                android:src="@drawable/geolocation_icon"
+                app:layout_constraintBottom_toBottomOf="@id/geolocation_choose_btn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/language_choose_btn" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/geolocation_values_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:textAppearance="@style/ProfileValuesTextStyle"
+                app:layout_constraintBottom_toBottomOf="@id/geolocation_choose_btn"
+                app:layout_constraintStart_toEndOf="@id/geolocation_icon_iv"
+                app:layout_constraintTop_toBottomOf="@id/language_choose_btn"
+                tools:text="New York city, USA" />
+
+            <Button
+                android:id="@+id/geolocation_choose_btn"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/chose_text_button"
+                android:textAppearance="@style/ChooseIconText"
+                android:textColor="@color/secondary_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/language_choose_btn" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_images_profile"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginTop="@dimen/extra_small_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintDimensionRatio="3:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/geolocation_choose_btn"
+                tools:itemCount="4"
+                tools:listitem="@layout/image_for_profile" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/questionnaires_btn"
+                style="@style/BorderedButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/big_margin"
+                android:paddingVertical="10dp"
+                android:text="@string/questionnaires"
+                app:layout_constraintEnd_toStartOf="@id/people_btn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/list_images_profile" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/people_btn"
+                style="@style/BorderedButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/extra_small_margin"
+                android:layout_marginTop="@dimen/big_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:paddingVertical="10dp"
+                android:text="@string/people"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/questionnaires_btn"
+                app:layout_constraintTop_toBottomOf="@id/list_images_profile" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/about_me_text_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/background_color"
-                android:orientation="vertical">
+                android:layout_marginHorizontal="@dimen/default_margin"
+                android:layout_marginTop="@dimen/extra_small_margin"
+                android:backgroundTint="@color/hint_color"
+                android:enabled="true"
+                android:hint="@string/about_me_hint"
+                android:textColorHint="@color/hint_color"
+                app:boxBackgroundColor="@color/hint_color"
+                app:boxStrokeColor="@color/hint_color"
+                app:counterEnabled="true"
+                app:counterMaxLength="300"
+                app:counterTextColor="@color/hint_color"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/hint_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/people_btn">
 
-                <include
-                    android:id="@+id/main_header_profile"
-                    layout="@layout/header_profile" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/about_me_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_color"
+                    android:inputType="textMultiLine"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="0dp"
+                    android:textColor="@color/on_primary_color"
+                    app:counterMaxLength="300"
+                    tools:text="@string/test_edit_text" />
 
-                <include
-                    android:id="@+id/main_about_profile"
-                    layout="@layout/about_profile" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <include
-                    android:id="@+id/main_lists"
-                    layout="@layout/moments_and_chronicies_list" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/dream_and_get_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/extra_small_margin"
+                android:layout_weight="1"
+                android:fontFamily="@font/inter"
+                android:lineSpacingExtra="5sp"
+                android:text="@string/dream_and_get"
+                android:textSize="16sp"
+                android:translationY="-2.32sp"
+                app:layout_constraintBottom_toBottomOf="@id/switch_dream"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/about_me_text_input" />
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+            <Switch
+                android:id="@+id/switch_dream"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="@dimen/extra_small_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/about_me_text_input"
+                tools:checked="true"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-        </ScrollView>
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/wishes_btn"
+                style="@style/BorderedButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/default_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:paddingVertical="@dimen/default_margin"
+                android:text="@string/wishes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dream_and_get_tv" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/moments_label_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="@dimen/recycler_view_top_margin"
+                android:text="@string/moments"
+                android:textAppearance="@style/ListLabelText"
+                android:textColor="@color/secondary_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/wishes_btn" />
 
-</FrameLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/moments_rv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="@dimen/list_margin"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/moments_label_tv"
+                tools:itemCount="5"
+                tools:listitem="@layout/image_for_moments" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/chronicies_label_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="@dimen/recycler_view_top_margin"
+                android:text="@string/chronicies"
+                android:textAppearance="@style/ListLabelText"
+                android:textColor="@color/secondary_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/moments_rv" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/chronicies_rv"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="@dimen/list_margin"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chronicies_label_tv"
+                app:spanCount="3"
+                tools:itemCount="9"
+                tools:listitem="@layout/image_for_chronicies" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
