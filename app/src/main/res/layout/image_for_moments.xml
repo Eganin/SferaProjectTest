@@ -1,32 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.imageview.ShapeableImageView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_marginStart="@dimen/image_rv_default_margin"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent">
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="H,2:4.4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:cardCornerRadius="4dp">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_moment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/image_for_profile"
-            tools:background="@drawable/moments_image"
-            android:clipToOutline="true"
-            android:scaleType="centerCrop">
-
-        </androidx.appcompat.widget.AppCompatImageView>
-
-    </androidx.cardview.widget.CardView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    android:id="@+id/image_moment"
+    android:layout_width="79dp"
+    android:layout_height="140dp"
+    android:layout_marginStart="@dimen/image_rv_default_margin"
+    android:contentDescription="@string/image_for_profile"
+    android:scaleType="centerCrop"
+    app:cardCornerRadius="4dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:background="@drawable/moments_image" />

@@ -8,6 +8,6 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.best.sferaprojecttest.presentation.fragments.profile.ProfileFragment"
-        tools:layout="@layout/profile_fragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment"
+        tools:layout="@layout/profile_fragment" />
 </navigation>
