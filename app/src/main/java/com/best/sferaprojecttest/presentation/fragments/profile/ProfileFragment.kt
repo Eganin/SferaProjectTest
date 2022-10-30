@@ -18,12 +18,10 @@ import com.best.sferaprojecttest.presentation.routing.Router
 import com.best.sferaprojecttest.presentation.screens.MainActivity
 import com.bumptech.glide.Glide
 
-class ProfileFragment : Fragment() {
+internal class ProfileFragment : Fragment() {
 
     private var _binding: ProfileFragmentBinding? = null
-
     private val binding get() = _binding!!
-
     private lateinit var adapterProfile: ProfileImagesAdapter
     private lateinit var adapterMoments: MomentsAdapter
     private lateinit var adapterChronices: ChroniciesAdapter

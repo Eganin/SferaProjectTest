@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="56dp"
+    android:id="@+id/people_view_holder"
     android:background="@color/background_color">
 
     <de.hdodenhof.circleimageview.CircleImageView

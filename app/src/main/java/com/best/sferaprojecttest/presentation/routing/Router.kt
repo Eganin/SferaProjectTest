@@ -1,6 +1,6 @@
 package com.best.sferaprojecttest.presentation.routing
 
-interface Router {
+internal interface Router {
     fun openPeopleFragment()
     fun openProfileFragment()
 }

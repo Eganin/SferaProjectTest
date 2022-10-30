@@ -7,7 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.best.sferaprojecttest.R
 import com.best.sferaprojecttest.presentation.routing.Router
 
-class MainActivity : AppCompatActivity(), Router {
+internal class MainActivity : AppCompatActivity(), Router {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.nav_host_fragment)
