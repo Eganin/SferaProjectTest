@@ -10,4 +10,7 @@
     <color name="error_color">#CF6679</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#9AFFFFFF</color>
     <color name="add_background">#1E1E1E</color>
+    <color name="toolbar_people_background">#272727</color>
+    <color name="inactive_color">#61FFFFFF</color>
+    <color name="divider_color">#1AFFFFFF</color>
 </resources>

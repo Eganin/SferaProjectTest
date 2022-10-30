@@ -16,4 +16,7 @@
     <string name="image_for_chronicies">Image For chronicies</string>
     <string name="image_for_moments">Image for moments</string>
     <string name="add_holder_description">Add</string>
+    <string name="people_title">People</string>
+    <string name="subscribe_text">Subscribe</string>
+    <string name="unsubscribe_text">Unsubscribe</string>
 </resources>

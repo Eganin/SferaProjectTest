@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolbar_profile"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="?attr/actionBarSize"
     android:minHeight="?attr/actionBarSize">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -12,10 +11,10 @@
         style="@style/Widget.MaterialComponents.Toolbar.Primary"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/background_color"
-        app:menu="@menu/profile_top_app_bar_menu"
-        app:navigationIcon="@drawable/menu_icon"
-        app:titleTextAppearance="@style/TitleStyle"
-        tools:title="@string/test_id" />
+        android:background="@color/toolbar_people_background"
+        app:menu="@menu/people_top_app__bar_menu"
+        app:navigationIcon="@drawable/back_icon"
+        app:title="@string/people_title"
+        app:titleTextAppearance="@style/TitleStyle" />
 
 </com.google.android.material.appbar.AppBarLayout>
