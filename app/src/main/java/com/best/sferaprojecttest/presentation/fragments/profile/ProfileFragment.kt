@@ -1,5 +1,6 @@
 package com.best.sferaprojecttest.presentation.fragments.profile
 
+import android.content.Context
 import android.os.Bundle
 import android.view.Display
 import android.view.LayoutInflater
@@ -10,9 +11,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.best.sferaprojecttest.R
 import com.best.sferaprojecttest.databinding.ProfileFragmentBinding
 import com.best.sferaprojecttest.domain.models.ImageForList
-import com.best.sferaprojecttest.presentation.fragments.adapters.ChroniciesAdapter
-import com.best.sferaprojecttest.presentation.fragments.adapters.MomentsAdapter
-import com.best.sferaprojecttest.presentation.fragments.adapters.ProfileImagesAdapter
+import com.best.sferaprojecttest.presentation.fragments.profile.adapters.ChroniciesAdapter
+import com.best.sferaprojecttest.presentation.fragments.profile.adapters.MomentsAdapter
+import com.best.sferaprojecttest.presentation.fragments.profile.adapters.ProfileImagesAdapter
+import com.best.sferaprojecttest.presentation.routing.Router
+import com.best.sferaprojecttest.presentation.screens.MainActivity
 import com.bumptech.glide.Glide
 
 class ProfileFragment : Fragment() {
@@ -24,6 +27,14 @@ class ProfileFragment : Fragment() {
     private lateinit var adapterProfile: ProfileImagesAdapter
     private lateinit var adapterMoments: MomentsAdapter
     private lateinit var adapterChronices: ChroniciesAdapter
+    private var listener : Router?=null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if(context is MainActivity){
+            listener=context
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,6 +52,17 @@ class ProfileFragment : Fragment() {
 
     private fun setupViews() {
         setupRecyclerViews()
+        setupListeners()
+        fillInTheData()
+    }
+
+    private fun setupListeners(){
+        binding.peopleBtn.setOnClickListener {
+            listener?.openPeopleFragment()
+        }
+    }
+
+    private fun fillInTheData(){
         Glide
             .with(requireContext())
             .load("https://i.pinimg.com/736x/7e/ce/c4/7ecec434137d1fcbe023db38e06c1260.jpg")

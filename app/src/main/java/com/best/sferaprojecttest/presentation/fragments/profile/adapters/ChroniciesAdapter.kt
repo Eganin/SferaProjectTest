@@ -1,4 +1,4 @@
-package com.best.sferaprojecttest.presentation.fragments.adapters
+package com.best.sferaprojecttest.presentation.fragments.profile.adapters
 
 import android.view.LayoutInflater
 import android.view.View
