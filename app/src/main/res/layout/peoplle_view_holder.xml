@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:id="@+id/people_view_holder"
+    android:background="@color/background_color">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/people_image_iv"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="@dimen/default_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/profile_image" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/people_nickname"
+        style="@style/PeopleTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/people_image_iv"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Карина Аринова" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/people_action_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:style="@style/PeopleActionSubscribeText"
+        tools:text="@string/subscribe_text" />
+
+    <View
+        android:id="@+id/divider"
+        android:background="@color/divider_color"
+        android:layout_width="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/people_nickname"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="1dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

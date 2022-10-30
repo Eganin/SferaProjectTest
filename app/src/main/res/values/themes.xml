@@ -50,7 +50,7 @@
 
     <style name="BorderedButtonStyle" parent="TextAppearance.AppCompat.Widget.Button">
         <item name="android:textSize">14sp</item>
-        <item name="android:lineSpacingExtra"> -1sp</item>
+        <item name="android:lineSpacingExtra">-1sp</item>
         <item name="android:fontFamily">@font/inter_medium</item>
         <item name="android:textColor">@color/on_primary_color</item>
         <item name="backgroundTint">@color/primary_color</item>
@@ -63,7 +63,41 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/secondary_color</item>
         <item name="android:lineSpacingExtra">1sp</item>
-        <item name="android:translationY"> -0.53sp</item>
+        <item name="android:translationY">-0.53sp</item>
         <item name="android:fontFamily">@font/inter_medium</item>
+    </style>
+
+    <style name="PeopleTitleText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">5sp</item>
+        <item name="android:translationY">-2.32sp</item>
+        <item name="android:fontFamily">@font/inter</item>
+    </style>
+
+    <style name="PeopleActionSubscribeText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">1sp</item>
+        <item name="android:translationY">-0.53sp</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:textColor">@color/secondary_color</item>
+    </style>
+
+    <style name="PeopleInactiveActionSubscribeText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">1sp</item>
+        <item name="android:translationY">-0.53sp</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:textColor">@color/inactive_color</item>
+    </style>
+
+    <style name="PeopleActionUnsubscribeText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">1sp</item>
+        <item name="android:translationY">-0.53sp</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:textColor">@color/hint_color</item>
     </style>
 </resources>

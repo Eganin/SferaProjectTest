@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/background_color"
-        app:menu="@menu/top_app_bar"
+        app:menu="@menu/profile_top_app_bar_menu"
         app:navigationIcon="@drawable/menu_icon"
         app:titleTextAppearance="@style/TitleStyle"
         tools:title="@string/test_id" />

@@ -9,5 +9,17 @@
         android:id="@+id/profileFragment"
         android:name="com.best.sferaprojecttest.presentation.fragments.profile.ProfileFragment"
         android:label="ProfileFragment"
-        tools:layout="@layout/profile_fragment" />
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_peopleFragment"
+            app:destination="@id/peopleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/peopleFragment"
+        android:name="com.best.sferaprojecttest.presentation.fragments.people.PeopleFragment"
+        android:label="PeopleFragment" >
+        <action
+            android:id="@+id/action_peopleFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>
