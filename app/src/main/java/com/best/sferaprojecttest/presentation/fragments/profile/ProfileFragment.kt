@@ -109,6 +109,7 @@ internal class ProfileFragment : Fragment() {
         adapterProfile = ProfileImagesAdapter()
         binding.listImagesProfile.adapter = adapterProfile
         adapterProfile.submitList(listImagesForProfile)
+        binding.listImagesProfile.suppressLayout(true)
 
         //create and setup Moments adapter
         adapterMoments = MomentsAdapter()
@@ -118,6 +119,8 @@ internal class ProfileFragment : Fragment() {
         //create and setup chronicies adapter
         adapterChronices = ChroniciesAdapter()
         binding.chroniciesRv.adapter = adapterChronices
+        binding.chroniciesRv.isVerticalFadingEdgeEnabled=true
         adapterChronices.submitList(listImagesForChronicies)
+        binding.chroniciesRv.suppressLayout(true)
     }
 }
