@@ -3,16 +3,17 @@ package com.best.sferaprojecttest.presentation.fragments.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.best.sferaprojecttest.databinding.AddViewHolderChroniciesBinding
+import com.best.sferaprojecttest.databinding.AddViewHolderMomentsBinding
 import com.best.sferaprojecttest.databinding.ImageForChroniciesBinding
+import com.best.sferaprojecttest.databinding.ImageForMomentsBinding
 import com.best.sferaprojecttest.domain.models.ImageForList
-import com.best.sferaprojecttest.presentation.fragments.util.ImageDiffUtilCallback
+import com.best.sferaprojecttest.presentation.fragments.util.DiffUtilCallback
 import com.bumptech.glide.Glide
 
-class ChroniciesAdapter :
-    ListAdapter<ImageForList, ChroniciesAdapter.ChroniciesViewHolder>(ImageDiffUtilCallback()) {
+class ChroniciesAdapter : RecyclerView.Adapter<ChroniciesAdapter.ChroniciesViewHolder>() {
 
     companion object {
         private const val TYPE_ADD = 0
@@ -36,6 +37,14 @@ class ChroniciesAdapter :
     inner class AddImageForChronicies(binding: AddViewHolderChroniciesBinding) :
         ChroniciesViewHolder(itemView = binding.root)
 
+    fun setList(list: List<ImageForList>) {
+        val diffCallback = DiffUtilCallback(oldList = imagesList, newList = list)
+        val diff = DiffUtil.calculateDiff(diffCallback)
+        imagesList.clear()
+        imagesList.addAll(list)
+        diff.dispatchUpdatesTo(this)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChroniciesViewHolder {
         return when (viewType) {
             TYPE_ADD -> AddImageForChronicies(
@@ -58,7 +67,7 @@ class ChroniciesAdapter :
     override fun onBindViewHolder(holder: ChroniciesViewHolder, position: Int) {
         when (holder) {
             is AddImageForChronicies -> {}
-            is ImageForChronicies -> holder.bind(item = imagesList[position - 1])
+            is ImageForChronicies -> holder.bind(item = imagesList[position-1])
         }
     }
 

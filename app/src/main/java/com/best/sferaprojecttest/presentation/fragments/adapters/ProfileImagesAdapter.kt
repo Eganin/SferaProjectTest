@@ -2,21 +2,20 @@ package com.best.sferaprojecttest.presentation.fragments.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.best.sferaprojecttest.databinding.ImageForProfileBinding
 import com.best.sferaprojecttest.domain.models.ImageForList
-import com.best.sferaprojecttest.presentation.fragments.util.ImageDiffUtilCallback
+import com.best.sferaprojecttest.presentation.fragments.util.DiffUtilCallback
 import com.bumptech.glide.Glide
 
 
-internal class ProfileImagesAdapter :
-    ListAdapter<ImageForList, ProfileImagesAdapter.ImageForProfile>(ImageDiffUtilCallback()) {
+internal class ProfileImagesAdapter:
+    RecyclerView.Adapter<ProfileImagesAdapter.ImageForProfile>() {
 
     private val imagesList: MutableList<ImageForList> = mutableListOf()
 
-    inner class ImageForProfile(private val binding: ImageForProfileBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class ImageForProfile(private val binding: ImageForProfileBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: ImageForList) {
             Glide
@@ -24,6 +23,14 @@ internal class ProfileImagesAdapter :
                 .load(item.link)
                 .into(binding.imageProfile)
         }
+    }
+
+    fun setList(list: List<ImageForList>){
+        val diffCallback = DiffUtilCallback(oldList = imagesList, newList = list)
+        val diff = DiffUtil.calculateDiff(diffCallback)
+        imagesList.clear()
+        imagesList.addAll(list)
+        diff.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageForProfile {
