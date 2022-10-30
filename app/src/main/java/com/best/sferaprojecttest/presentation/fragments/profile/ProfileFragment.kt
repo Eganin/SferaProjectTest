@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.best.sferaprojecttest.R
 import com.best.sferaprojecttest.databinding.ProfileFragmentBinding
 import com.best.sferaprojecttest.domain.models.ImageForList
@@ -44,11 +45,11 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
             .with(requireContext())
             .load("https://i.pinimg.com/736x/7e/ce/c4/7ecec434137d1fcbe023db38e06c1260.jpg")
             .into(binding.profileImageIv)
-        binding.ratingProfileTv.text= "5.0"
-        binding.mainToolbar.topAppBar.title =getString(R.string.test_id)
+        binding.ratingProfileTv.text = "5.0"
+        binding.mainToolbar.topAppBar.title = getString(R.string.test_id)
         binding.profileNicknameTv.text = "Eren Jager"
         binding.languageValuesTv.text = "English, Japanese"
-        binding.geolocationValuesTv.text ="Paradise"
+        binding.geolocationValuesTv.text = "Paradise"
     }
 
     private fun setupRecyclerViews() {
@@ -82,17 +83,18 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
 
         //create and setup Profile adapter
         adapterProfile = ProfileImagesAdapter()
-        adapterProfile.setList(list = listImagesForProfile)
         binding.listImagesProfile.adapter = adapterProfile
+        binding.listImagesProfile.layoutManager = LinearLayoutManager(requireContext())
+        adapterProfile.submitList(listImagesForProfile)
 
         //create and setup Moments adapter
         adapterMoments = MomentsAdapter()
-        adapterMoments.setList(list = listImagesForMoments)
         binding.momentsRv.adapter = adapterMoments
+        adapterMoments.submitList(listImagesForMoments)
 
         //create and setup chronicies adapter
         adapterChronices = ChroniciesAdapter()
-        adapterChronices.setList(list = listImagesForChronicies)
         binding.chroniciesRv.adapter = adapterChronices
+        adapterChronices.submitList(listImagesForChronicies)
     }
 }
