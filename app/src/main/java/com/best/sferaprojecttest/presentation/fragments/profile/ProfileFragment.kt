@@ -14,7 +14,7 @@ import com.best.sferaprojecttest.presentation.fragments.adapters.MomentsAdapter
 import com.best.sferaprojecttest.presentation.fragments.adapters.ProfileImagesAdapter
 import com.bumptech.glide.Glide
 
-class ProfileFragment : Fragment(R.layout.profile_fragment) {
+class ProfileFragment : Fragment() {
 
     private var _binding: ProfileFragmentBinding? = null
 
@@ -82,17 +82,17 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
 
         //create and setup Profile adapter
         adapterProfile = ProfileImagesAdapter()
-        adapterProfile.setList(list = listImagesForProfile)
         binding.listImagesProfile.adapter = adapterProfile
+        adapterProfile.submitList(listImagesForProfile)
 
         //create and setup Moments adapter
         adapterMoments = MomentsAdapter()
-        adapterMoments.setList(list = listImagesForMoments)
         binding.momentsRv.adapter = adapterMoments
+        adapterMoments.submitList(listImagesForMoments)
 
         //create and setup chronicies adapter
         adapterChronices = ChroniciesAdapter()
-        adapterChronices.setList(list = listImagesForChronicies)
         binding.chroniciesRv.adapter = adapterChronices
+        adapterChronices.submitList(listImagesForChronicies)
     }
 }
