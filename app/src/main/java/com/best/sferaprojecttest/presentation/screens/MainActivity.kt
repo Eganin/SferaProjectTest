@@ -5,9 +5,14 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.best.sferaprojecttest.R
+import com.best.sferaprojecttest.presentation.fragments.SferaFragmentFactory
 import com.best.sferaprojecttest.presentation.routing.Router
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-internal class MainActivity : AppCompatActivity(), Router {
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity(), Router {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.nav_host_fragment)

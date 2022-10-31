@@ -8,9 +8,13 @@ import com.best.sferaprojecttest.databinding.ImageForProfileBinding
 import com.best.sferaprojecttest.domain.models.ImageForList
 import com.best.sferaprojecttest.presentation.fragments.util.ImageForListDiffUtilCallback
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
+import javax.inject.Inject
 
 
-internal class ProfileImagesAdapter :
+class ProfileImagesAdapter (
+    private val glide: RequestManager
+) :
     ListAdapter<ImageForList, ProfileImagesAdapter.ImageForProfileViewHolder>(
         ImageForListDiffUtilCallback()
     ) {
@@ -19,8 +23,7 @@ internal class ProfileImagesAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: ImageForList) {
-            Glide
-                .with(itemView.context)
+            glide
                 .load(item.link)
                 .into(binding.imageProfile)
         }

@@ -17,14 +17,18 @@ import com.best.sferaprojecttest.presentation.fragments.profile.adapters.Profile
 import com.best.sferaprojecttest.presentation.routing.Router
 import com.best.sferaprojecttest.presentation.screens.MainActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
+import javax.inject.Inject
 
-internal class ProfileFragment : Fragment() {
+class ProfileFragment (
+    private val adapterProfile: ProfileImagesAdapter,
+    private val adapterMoments: MomentsAdapter,
+    private val adapterChronices: ChroniciesAdapter,
+    private val glide : RequestManager
+) : Fragment() {
 
     private var _binding: ProfileFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapterProfile: ProfileImagesAdapter
-    private lateinit var adapterMoments: MomentsAdapter
-    private lateinit var adapterChronices: ChroniciesAdapter
     private var listener : Router?=null
 
     override fun onAttach(context: Context) {
@@ -61,8 +65,7 @@ internal class ProfileFragment : Fragment() {
     }
 
     private fun fillInTheData(){
-        Glide
-            .with(requireContext())
+        glide
             .load("https://i.pinimg.com/736x/7e/ce/c4/7ecec434137d1fcbe023db38e06c1260.jpg")
             .into(binding.profileImageIv)
         binding.ratingProfileTv.text= "5.0"
@@ -106,18 +109,15 @@ internal class ProfileFragment : Fragment() {
             ).toMutableList()
 
         //create and setup Profile adapter
-        adapterProfile = ProfileImagesAdapter()
         binding.listImagesProfile.adapter = adapterProfile
         adapterProfile.submitList(listImagesForProfile)
         binding.listImagesProfile.suppressLayout(true)
 
         //create and setup Moments adapter
-        adapterMoments = MomentsAdapter()
         binding.momentsRv.adapter = adapterMoments
         adapterMoments.submitList(listImagesForMoments)
 
         //create and setup chronicies adapter
-        adapterChronices = ChroniciesAdapter()
         binding.chroniciesRv.adapter = adapterChronices
         binding.chroniciesRv.isVerticalFadingEdgeEnabled=true
         adapterChronices.submitList(listImagesForChronicies)

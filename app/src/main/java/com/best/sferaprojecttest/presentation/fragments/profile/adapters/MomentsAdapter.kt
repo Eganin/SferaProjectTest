@@ -10,8 +10,12 @@ import com.best.sferaprojecttest.databinding.ImageForMomentsBinding
 import com.best.sferaprojecttest.domain.models.ImageForList
 import com.best.sferaprojecttest.presentation.fragments.util.ImageForListDiffUtilCallback
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
+import javax.inject.Inject
 
-class MomentsAdapter :
+class MomentsAdapter (
+    private val glide: RequestManager
+) :
     ListAdapter<ImageForList, MomentsAdapter.MomentViewHolder>(ImageForListDiffUtilCallback()) {
 
     companion object {
@@ -24,8 +28,7 @@ class MomentsAdapter :
     inner class ImageForMomentsViewHolder(private val binding: ImageForMomentsBinding) :
         MomentViewHolder(binding.root) {
         fun bind(item: ImageForList) {
-            Glide
-                .with(itemView.context)
+            glide
                 .load(item.link)
                 .into(binding.imageMoment)
         }
