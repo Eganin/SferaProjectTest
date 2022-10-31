@@ -12,12 +12,13 @@ import com.best.sferaprojecttest.presentation.fragments.people.adapters.PeopleAd
 import com.best.sferaprojecttest.presentation.routing.Router
 import com.best.sferaprojecttest.presentation.screens.MainActivity
 
-internal class PeopleFragment : Fragment() {
+class PeopleFragment (
+    private val peopleAdapter : PeopleAdapter
+) : Fragment() {
 
     private var _binding: PeopleFragmentBinding? = null
     private val binding get() = _binding!!
     private var listener: Router? = null
-    private lateinit var peopleAdapter : PeopleAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -65,7 +66,6 @@ internal class PeopleFragment : Fragment() {
                 action = PeopleInfo.PeopleAction.UNSUBSCRIBE
             ),
         )
-        peopleAdapter = PeopleAdapter()
         binding.peoplesRv.adapter=peopleAdapter
         peopleAdapter.submitList(peopleList)
     }

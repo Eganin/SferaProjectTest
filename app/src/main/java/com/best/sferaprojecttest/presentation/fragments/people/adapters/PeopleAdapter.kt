@@ -10,15 +10,16 @@ import com.best.sferaprojecttest.databinding.PeoplleViewHolderBinding
 import com.best.sferaprojecttest.domain.models.PeopleInfo
 import com.best.sferaprojecttest.presentation.fragments.util.PeopleInfoDiffUtilCallback
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 
-internal class PeopleAdapter :
+class PeopleAdapter (private val glide : RequestManager):
     ListAdapter<PeopleInfo, PeopleAdapter.PeopleViewHolder>(PeopleInfoDiffUtilCallback()) {
 
     inner class PeopleViewHolder(private val binding: PeoplleViewHolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: PeopleInfo) {
-            Glide.with(itemView.context)
+            glide
                 .load(item.imageLink)
                 .into(binding.peopleImageIv)
 
