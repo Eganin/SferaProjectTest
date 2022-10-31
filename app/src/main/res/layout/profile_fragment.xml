@@ -172,22 +172,22 @@
                 app:layout_constraintTop_toBottomOf="@id/list_images_profile" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:theme="@style/TextInputLayoutTheme"
                 android:id="@+id/about_me_text_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/default_margin"
                 android:layout_marginTop="@dimen/extra_small_margin"
-                android:backgroundTint="@color/hint_color"
                 android:enabled="true"
                 android:hint="@string/about_me_hint"
+                android:backgroundTint="@color/hint_color"
                 android:textColorHint="@color/hint_color"
-                app:boxBackgroundColor="@color/hint_color"
-                app:boxStrokeColor="@color/hint_color"
+                app:boxStrokeColor="@color/secondary_color"
                 app:counterEnabled="true"
                 app:counterMaxLength="300"
                 app:counterTextColor="@color/hint_color"
                 app:endIconMode="clear_text"
-                app:hintTextColor="@color/hint_color"
+                app:hintTextColor="@color/secondary_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/people_btn">

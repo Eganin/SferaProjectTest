@@ -11,9 +11,10 @@ import com.best.sferaprojecttest.domain.models.PeopleInfo
 import com.best.sferaprojecttest.presentation.fragments.people.adapters.PeopleAdapter
 import com.best.sferaprojecttest.presentation.routing.Router
 import com.best.sferaprojecttest.presentation.screens.MainActivity
+import io.github.serpro69.kfaker.Faker
 
-class PeopleFragment (
-    private val peopleAdapter : PeopleAdapter
+class PeopleFragment(
+    private val peopleAdapter: PeopleAdapter
 ) : Fragment() {
 
     private var _binding: PeopleFragmentBinding? = null
@@ -22,8 +23,8 @@ class PeopleFragment (
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if(context is MainActivity){
-            listener=context
+        if (context is MainActivity) {
+            listener = context
         }
     }
 
@@ -32,7 +33,7 @@ class PeopleFragment (
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = PeopleFragmentBinding.inflate(inflater,container,false)
+        _binding = PeopleFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -42,31 +43,40 @@ class PeopleFragment (
         setupRecyclerView()
     }
 
-    private fun setupListeners(){
+    private fun setupListeners() {
         binding.peopleToolbar.topAppBar.setNavigationOnClickListener {
             listener?.openProfileFragment()
         }
     }
 
-    private fun setupRecyclerView(){
-        val peopleList = listOf(
+    private fun setupRecyclerView() {
+        val faker = Faker()
+        val newList = (0..40).map { index ->
             PeopleInfo(
-                title = "Eren Jager",
-                imageLink = "https://i.pinimg.com/originals/7f/fc/2c/7ffc2cbc04b0c3cfbacfa51297b96966.jpg",
-                action = PeopleInfo.PeopleAction.SUBSCRIBE_ACTIVE
-            ),
-            PeopleInfo(
-                title = "Levi Ackerman",
-                imageLink = "https://i.pinimg.com/736x/cf/8c/34/cf8c340732e4c2c8152780a4cc636895.jpg",
-                action = PeopleInfo.PeopleAction.SUBSCRIBE_INACTIVE
-            ),
-            PeopleInfo(
-                title = "Mikasa Ackerman",
-                imageLink = "https://www.absoluteanime.com/attack_on_titan/mikasa%5B2%5D.jpg",
-                action = PeopleInfo.PeopleAction.UNSUBSCRIBE
-            ),
-        )
-        binding.peoplesRv.adapter=peopleAdapter
-        peopleAdapter.submitList(peopleList)
+                title = faker.name.name(),
+                imageLink = getLink(id = index),
+                action = getAction(id = (1..2).random())
+            )
+        }
+        binding.peoplesRv.adapter = peopleAdapter
+        peopleAdapter.submitList(newList)
+    }
+
+    private fun getAction(id: Int) = when (id) {
+        1 -> PeopleInfo.PeopleAction.SUBSCRIBE
+        else -> PeopleInfo.PeopleAction.UNSUBSCRIBE
+    }
+
+    private fun getLink(id: Int) = when {
+        id % 3 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/3/3d/Sasha_Blouse_character_image.png/revision/latest?cb=20180215193834"
+        id % 5 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/1/18/Erwin_Smith_character_image.png/revision/latest/scale-to-width-down/350?cb=20190514212751"
+        id % 7 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/9/91/Petra_Ral_character_image.png/revision/latest/scale-to-width-down/350?cb=20190824104211"
+        id % 11 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/7/7b/Porco_Galliard_character_image.png/revision/latest/scale-to-width-down/350?cb=20190410154154"
+        id % 13 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/0/02/Bertolt_Hoover_character_image.png/revision/latest/scale-to-width-down/350?cb=20190717190848"
+        id % 17 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/9/9f/Historia_Reiss_character_image.png/revision/latest/scale-to-width-down/350?cb=20210411172422"
+        id % 19 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/f/f7/Mikasa_Ackerman_character_image.png/revision/latest/scale-to-width-down/350?cb=20210410131531"
+        id % 23 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/0/0f/Reiner_Braun_character_image.png/revision/latest/scale-to-width-down/350?cb=20190710044204"
+        id % 29 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/6/69/Eren_Yeager_character_image.png/revision/latest/scale-to-width-down/350?cb=20200910221354"
+        else -> "https://static.wikia.nocookie.net/shingekinokyojin/images/9/94/Levi_Ackerman_character_image.png/revision/latest?cb=20210410135001"
     }
 }

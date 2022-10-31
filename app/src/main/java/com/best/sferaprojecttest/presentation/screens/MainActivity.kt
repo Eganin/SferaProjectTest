@@ -2,6 +2,7 @@ package com.best.sferaprojecttest.presentation.screens
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.best.sferaprojecttest.R
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity(), Router {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.nav_host_fragment)
+        window.statusBarColor= ContextCompat.getColor(this,R.color.black)
     }
 
     override fun openPeopleFragment() {

@@ -26,17 +26,28 @@ class PeopleAdapter (private val glide : RequestManager):
             binding.peopleNickname.text = item.title
 
             when(item.action){
-                PeopleInfo.PeopleAction.SUBSCRIBE_ACTIVE->{
+                PeopleInfo.PeopleAction.SUBSCRIBE->{
                     binding.peopleActionBtn.text=itemView.context.getString(R.string.subscribe_text)
                     TextViewCompat.setTextAppearance(binding.peopleActionBtn, R.style.PeopleActionSubscribeText)
-                }
-                PeopleInfo.PeopleAction.SUBSCRIBE_INACTIVE->{
-                    binding.peopleActionBtn.text=itemView.context.getString(R.string.subscribe_text)
-                    TextViewCompat.setTextAppearance(binding.peopleActionBtn, R.style.PeopleInactiveActionSubscribeText)
                 }
                 PeopleInfo.PeopleAction.UNSUBSCRIBE->{
                     binding.peopleActionBtn.text=itemView.context.getString(R.string.unsubscribe_text)
                     TextViewCompat.setTextAppearance(binding.peopleActionBtn, R.style.PeopleActionUnsubscribeText)
+                }
+            }
+
+            itemView.setOnClickListener {
+                when(item.action){
+                    PeopleInfo.PeopleAction.SUBSCRIBE->{
+                        item.action=PeopleInfo.PeopleAction.UNSUBSCRIBE
+                        binding.peopleActionBtn.text=itemView.context.getString(R.string.unsubscribe_text)
+                        TextViewCompat.setTextAppearance(binding.peopleActionBtn, R.style.PeopleActionUnsubscribeText)
+                    }
+                    PeopleInfo.PeopleAction.UNSUBSCRIBE->{
+                        item.action=PeopleInfo.PeopleAction.SUBSCRIBE
+                        binding.peopleActionBtn.text=itemView.context.getString(R.string.subscribe_text)
+                        TextViewCompat.setTextAppearance(binding.peopleActionBtn, R.style.PeopleActionSubscribeText)
+                    }
                 }
             }
         }
