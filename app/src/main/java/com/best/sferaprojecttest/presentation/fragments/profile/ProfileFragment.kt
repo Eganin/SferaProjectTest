@@ -1,11 +1,14 @@
 package com.best.sferaprojecttest.presentation.fragments.profile
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.Display
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources.getColorStateList
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.best.sferaprojecttest.R
@@ -20,21 +23,21 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import javax.inject.Inject
 
-class ProfileFragment (
+class ProfileFragment(
     private val adapterProfile: ProfileImagesAdapter,
     private val adapterMoments: MomentsAdapter,
     private val adapterChronices: ChroniciesAdapter,
-    private val glide : RequestManager
+    private val glide: RequestManager
 ) : Fragment() {
 
     private var _binding: ProfileFragmentBinding? = null
     private val binding get() = _binding!!
-    private var listener : Router?=null
+    private var listener: Router? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if(context is MainActivity){
-            listener=context
+        if (context is MainActivity) {
+            listener = context
         }
     }
 
@@ -58,21 +61,25 @@ class ProfileFragment (
         fillInTheData()
     }
 
-    private fun setupListeners(){
+    private fun setupListeners() {
         binding.peopleBtn.setOnClickListener {
             listener?.openPeopleFragment()
         }
+        binding.aboutMeEditText.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) binding.aboutMeTextInput.counterTextColor =
+                getColorStateList(requireContext(), R.color.secondary_color)
+        }
     }
 
-    private fun fillInTheData(){
+    private fun fillInTheData() {
         glide
             .load("https://i.pinimg.com/736x/7e/ce/c4/7ecec434137d1fcbe023db38e06c1260.jpg")
             .into(binding.profileImageIv)
-        binding.ratingProfileTv.text= "5.0"
-        binding.mainToolbar.topAppBar.title =getString(R.string.test_id)
+        binding.ratingProfileTv.text = "5.0"
+        binding.mainToolbar.topAppBar.title = getString(R.string.test_id)
         binding.profileNicknameTv.text = "Eren Jager"
         binding.languageValuesTv.text = "English, Japanese"
-        binding.geolocationValuesTv.text ="Paradise"
+        binding.geolocationValuesTv.text = "Paradise"
     }
 
     private fun setupRecyclerViews() {
@@ -119,7 +126,7 @@ class ProfileFragment (
 
         //create and setup chronicies adapter
         binding.chroniciesRv.adapter = adapterChronices
-        binding.chroniciesRv.isVerticalFadingEdgeEnabled=true
+        binding.chroniciesRv.isVerticalFadingEdgeEnabled = true
         adapterChronices.submitList(listImagesForChronicies)
         binding.chroniciesRv.suppressLayout(true)
     }

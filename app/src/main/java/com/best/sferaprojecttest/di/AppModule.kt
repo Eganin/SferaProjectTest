@@ -32,20 +32,17 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideProfileAdapter(glide: RequestManager): ProfileImagesAdapter =
-        ProfileImagesAdapter(glide = glide)
+    fun provideProfileAdapter(glide: RequestManager) = ProfileImagesAdapter(glide = glide)
 
     @Singleton
     @Provides
-    fun provideMomentsAdapter(glide: RequestManager): MomentsAdapter = MomentsAdapter(glide = glide)
+    fun provideMomentsAdapter(glide: RequestManager) = MomentsAdapter(glide = glide)
 
     @Singleton
     @Provides
-    fun provideChroniciesAdapter(glide: RequestManager): ChroniciesAdapter =
-        ChroniciesAdapter(glide = glide)
+    fun provideChroniciesAdapter(glide: RequestManager) = ChroniciesAdapter(glide = glide)
 
     @Singleton
     @Provides
-    fun providePeopleAdapter(glide: RequestManager): PeopleAdapter =
-        PeopleAdapter(glide = glide)
+    fun providePeopleAdapter(glide: RequestManager) = PeopleAdapter(glide = glide)
 }
