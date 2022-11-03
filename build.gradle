@@ -4,6 +4,13 @@ buildscript {
         def nav_version = "2.5.3"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
     }
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url = 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
+    }
 }
 plugins {
     id 'com.android.application' version '7.3.1' apply false

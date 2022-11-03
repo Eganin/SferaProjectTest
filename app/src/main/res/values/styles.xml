@@ -1,21 +1,5 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.SferaProjectTest" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/primary_color</item>
-        <item name="colorPrimaryVariant">@color/primary_color</item>
-        <item name="colorOnPrimary">@color/on_primary_color</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/secondary_color</item>
-        <item name="colorSecondaryVariant">@color/secondary_color</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/black</item>
-        <item name="android:textColor">@color/on_primary_color</item>
-        <!-- Customize your theme here. -->
-        <item name="colorOnBackground">@color/on_primary_color</item>
-    </style>
-
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
     <style name="TitleStyle">
         <item name="android:fontFamily">@font/inter_medium</item>
         <item name="android:letterSpacing">-0.03</item>
@@ -50,7 +34,7 @@
 
     <style name="BorderedButtonStyle" parent="TextAppearance.AppCompat.Widget.Button">
         <item name="android:textSize">14sp</item>
-        <item name="android:lineSpacingExtra"> -1sp</item>
+        <item name="android:lineSpacingExtra">-1sp</item>
         <item name="android:fontFamily">@font/inter_medium</item>
         <item name="android:textColor">@color/on_primary_color</item>
         <item name="backgroundTint">@color/primary_color</item>
@@ -63,7 +47,36 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/secondary_color</item>
         <item name="android:lineSpacingExtra">1sp</item>
-        <item name="android:translationY"> -0.53sp</item>
+        <item name="android:translationY">-0.53sp</item>
         <item name="android:fontFamily">@font/inter_medium</item>
+    </style>
+
+    <style name="PeopleTitleText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">5sp</item>
+        <item name="android:translationY">-2.32sp</item>
+        <item name="android:fontFamily">@font/inter</item>
+    </style>
+
+    <style name="PeopleActionSubscribeText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">1sp</item>
+        <item name="android:translationY">-0.53sp</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:textColor">@color/secondary_color</item>
+    </style>
+
+    <style name="PeopleActionUnsubscribeText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">1sp</item>
+        <item name="android:translationY">-0.53sp</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:textColor">@color/hint_color</item>
+    </style>
+
+    <style name="TextInputLayoutTheme">
+        <item name="colorControlActivated">@color/secondary_color</item>
     </style>
 </resources>
