@@ -11,15 +11,16 @@
         android:label="ProfileFragment"
         tools:layout="@layout/profile_fragment" >
         <action
-            android:id="@+id/action_profileFragment_to_peopleFragment"
-            app:destination="@id/peopleFragment" />
+            android:id="@+id/action_profileFragment_to_peopleViewPagerFragment"
+            app:destination="@id/peopleViewPagerFragment" />
     </fragment>
     <fragment
-        android:id="@+id/peopleFragment"
-        android:name="com.best.sferaprojecttest.presentation.fragments.people.PeopleFragment"
-        android:label="PeopleFragment" >
+        android:id="@+id/peopleViewPagerFragment"
+        tools:layout="@layout/people_view_pager"
+        android:name="com.best.sferaprojecttest.presentation.fragments.people.viewpager.PeopleViewPagerFragment"
+        android:label="PeopleViewPagerFragment" >
         <action
-            android:id="@+id/action_peopleFragment_to_profileFragment"
+            android:id="@+id/action_peopleViewPagerFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
     </fragment>
 </navigation>

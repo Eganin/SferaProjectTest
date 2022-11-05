@@ -50,7 +50,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
-
     def nav_version = "2.5.3"
     // Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
@@ -63,6 +62,8 @@ dependencies {
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-compiler:2.44"
     implementation 'io.github.serpro69:kotlin-faker:1.13.0-rc.0'
+
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
 }
 
 kapt {

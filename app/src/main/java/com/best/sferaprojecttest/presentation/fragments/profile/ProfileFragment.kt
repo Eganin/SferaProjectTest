@@ -88,7 +88,7 @@ class ProfileFragment(
 
     private fun setupListeners() {
         binding.peopleBtn.setOnClickListener {
-            listener?.openPeopleFragment()
+            listener?.openPeopleViewPagerFragment()
         }
         binding.aboutMeEditText.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) binding.aboutMeTextInput.counterTextColor =

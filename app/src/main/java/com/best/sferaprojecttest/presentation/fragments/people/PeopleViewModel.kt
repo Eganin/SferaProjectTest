@@ -1,48 +1,62 @@
 package com.best.sferaprojecttest.presentation.fragments.people
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.best.sferaprojecttest.databinding.PeopleFragmentBinding
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.best.sferaprojecttest.domain.models.PeopleInfo
-import com.best.sferaprojecttest.presentation.fragments.people.adapters.PeopleAdapter
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.serpro69.kfaker.Faker
+import javax.inject.Inject
 
-class PeopleFragment(
-    private val peopleAdapter: PeopleAdapter
-) : Fragment() {
+@HiltViewModel
+class PeopleViewModel @Inject constructor() : ViewModel() {
 
-    private var _binding: PeopleFragmentBinding? = null
-    private val binding get() = _binding!!
+    private val _subscribersInfo = MutableLiveData<List<PeopleInfo>>()
+    val subscribesInfo: LiveData<List<PeopleInfo>> = _subscribersInfo
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = PeopleFragmentBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    private val _subscriptionsInfo = MutableLiveData<List<PeopleInfo>>()
+    val subscriptionsInfo: LiveData<List<PeopleInfo>> = _subscriptionsInfo
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
-    }
+    private val _mutuallyInfo = MutableLiveData<List<PeopleInfo>>()
+    val mutuallyInfo: LiveData<List<PeopleInfo>> = _mutuallyInfo
 
-    private fun setupRecyclerView() {
+    fun init() {
         val faker = Faker()
-        val newList = (0..40).map { index ->
-            PeopleInfo(
-                id = index,
-                title = faker.name.name(),
-                imageLink = getLink(id = index),
-                action = getAction(id = (1..2).random())
-            )
+        val subscriptions = mutableListOf<PeopleInfo>()
+        val subscribers = mutableListOf<PeopleInfo>()
+        val mutually = mutableListOf<PeopleInfo>()
+        (0..40).map { index ->
+            when (index) {
+                in 0..12 -> subscribers.add(
+                    PeopleInfo(
+                        id = index,
+                        title = faker.name.name(),
+                        imageLink = getLink(id = index),
+                        action = getAction(id = (1..2).random())
+                    )
+                )
+                in 13..26 -> subscriptions.add(
+                    PeopleInfo(
+                        id = index,
+                        title = faker.name.name(),
+                        imageLink = getLink(id = index),
+                        action = PeopleInfo.PeopleAction.UNSUBSCRIBE
+                    )
+                )
+                else -> mutually.add(
+                    PeopleInfo(
+                        id = index,
+                        title = faker.name.name(),
+                        imageLink = getLink(id = index),
+                        action = PeopleInfo.PeopleAction.UNSUBSCRIBE
+                    )
+                )
+            }
         }
-        binding.peoplesRv.adapter = peopleAdapter
-        peopleAdapter.submitList(newList)
+
+        _subscriptionsInfo.postValue(subscriptions)
+        _subscribersInfo.postValue(subscribers)
+        _mutuallyInfo.postValue(mutually)
     }
 
     private fun getAction(id: Int) = when (id) {
