@@ -50,6 +50,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+
     def nav_version = "2.5.3"
     // Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"

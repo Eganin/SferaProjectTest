@@ -1,28 +1,25 @@
 package com.best.sferaprojecttest.presentation.fragments.profile
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.os.Bundle
-import android.view.Display
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getColorStateList
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.fragment.app.viewModels
 import com.best.sferaprojecttest.R
 import com.best.sferaprojecttest.databinding.ProfileFragmentBinding
-import com.best.sferaprojecttest.domain.models.ImageForList
+import com.best.sferaprojecttest.domain.models.ProfileInfo
 import com.best.sferaprojecttest.presentation.fragments.profile.adapters.ChroniciesAdapter
 import com.best.sferaprojecttest.presentation.fragments.profile.adapters.MomentsAdapter
 import com.best.sferaprojecttest.presentation.fragments.profile.adapters.ProfileImagesAdapter
 import com.best.sferaprojecttest.presentation.routing.Router
 import com.best.sferaprojecttest.presentation.screens.MainActivity
-import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileFragment(
     private val adapterProfile: ProfileImagesAdapter,
     private val adapterMoments: MomentsAdapter,
@@ -33,6 +30,7 @@ class ProfileFragment(
     private var _binding: ProfileFragmentBinding? = null
     private val binding get() = _binding!!
     private var listener: Router? = null
+    private val profileViewModel: ProfileViewModel by viewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -52,82 +50,63 @@ class ProfileFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        profileViewModel.init()
         setupViews()
+        observeData()
+    }
+
+    private fun observeData() {
+        profileViewModel.profileInfo.observe(viewLifecycleOwner) {
+            fillProfileData(profileInfo = it)
+        }
+        profileViewModel.imagesForProfile.observe(viewLifecycleOwner) {
+            adapterProfile.submitList(it)
+        }
+        profileViewModel.imagesForMoments.observe(viewLifecycleOwner) {
+            adapterMoments.submitList(it)
+        }
+        profileViewModel.imagesForChronicies.observe(viewLifecycleOwner) {
+            adapterChronices.submitList(it)
+        }
+    }
+
+    private fun fillProfileData(profileInfo: ProfileInfo) {
+        glide
+            .load(profileInfo.avatarLink)
+            .into(binding.profileImageIv)
+        binding.ratingProfileTv.text = profileInfo.rating.toString()
+        binding.mainToolbar.topAppBar.title = profileInfo.id
+        binding.profileNicknameTv.text = profileInfo.nickName
+        binding.languageValuesTv.text = profileInfo.languages
+        binding.geolocationValuesTv.text = profileInfo.geolocations
     }
 
     private fun setupViews() {
         setupRecyclerViews()
         setupListeners()
-        fillInTheData()
     }
 
     private fun setupListeners() {
         binding.peopleBtn.setOnClickListener {
             listener?.openPeopleFragment()
         }
-        binding.aboutMeEditText.setOnFocusChangeListener { v, hasFocus ->
+        binding.aboutMeEditText.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) binding.aboutMeTextInput.counterTextColor =
                 getColorStateList(requireContext(), R.color.secondary_color)
         }
     }
 
-    private fun fillInTheData() {
-        glide
-            .load("https://i.pinimg.com/736x/7e/ce/c4/7ecec434137d1fcbe023db38e06c1260.jpg")
-            .into(binding.profileImageIv)
-        binding.ratingProfileTv.text = "5.0"
-        binding.mainToolbar.topAppBar.title = getString(R.string.test_id)
-        binding.profileNicknameTv.text = "Eren Jager"
-        binding.languageValuesTv.text = "English, Japanese"
-        binding.geolocationValuesTv.text = "Paradise"
-    }
-
     private fun setupRecyclerViews() {
-        val listImagesForProfile =
-            listOf(
-                ImageForList(link = "https://i.pinimg.com/736x/7e/ce/c4/7ecec434137d1fcbe023db38e06c1260.jpg"),
-                ImageForList(link = "https://cloudfront-us-east-1.images.arcpublishing.com/gruporepublica/3SJFG4PNVZCTPEFICIMBX3GBNI.jpg"),
-                ImageForList(link = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAOx2RPl8fc_NYxNNpuFM26XqTphDKOrVVzw&usqp=CAU"),
-                ImageForList(link = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_SBzlRLLwDLMkPqQpgiwwAXru6zTv9TgllJBx1YtV3K7Em9AZ1maJ9PbmLKxwZxEcTWw&usqp=CAU"),
-            ).toMutableList()
-
-        val listImagesForMoments =
-            listOf(
-                ImageForList(link = "https://i.pinimg.com/736x/7e/ce/c4/7ecec434137d1fcbe023db38e06c1260.jpg"),
-                ImageForList(link = "https://cloudfront-us-east-1.images.arcpublishing.com/gruporepublica/3SJFG4PNVZCTPEFICIMBX3GBNI.jpg"),
-                ImageForList(link = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAOx2RPl8fc_NYxNNpuFM26XqTphDKOrVVzw&usqp=CAU"),
-                ImageForList(link = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAOx2RPl8fc_NYxNNpuFM26XqTphDKOrVVzw&usqp=CAU"),
-                ImageForList(link = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_SBzlRLLwDLMkPqQpgiwwAXru6zTv9TgllJBx1YtV3K7Em9AZ1maJ9PbmLKxwZxEcTWw&usqp=CAU"),
-            ).toMutableList()
-
-        val listImagesForChronicies =
-            listOf(
-                ImageForList(link = "https://i.pinimg.com/736x/7e/ce/c4/7ecec434137d1fcbe023db38e06c1260.jpg"),
-                ImageForList(link = "https://i.pinimg.com/736x/7e/ce/c4/7ecec434137d1fcbe023db38e06c1260.jpg"),
-                ImageForList(link = "https://cloudfront-us-east-1.images.arcpublishing.com/gruporepublica/3SJFG4PNVZCTPEFICIMBX3GBNI.jpg"),
-                ImageForList(link = "https://cloudfront-us-east-1.images.arcpublishing.com/gruporepublica/3SJFG4PNVZCTPEFICIMBX3GBNI.jpg"),
-                ImageForList(link = "https://cloudfront-us-east-1.images.arcpublishing.com/gruporepublica/3SJFG4PNVZCTPEFICIMBX3GBNI.jpg"),
-                ImageForList(link = "https://cloudfront-us-east-1.images.arcpublishing.com/gruporepublica/3SJFG4PNVZCTPEFICIMBX3GBNI.jpg"),
-                ImageForList(link = "https://cloudfront-us-east-1.images.arcpublishing.com/gruporepublica/3SJFG4PNVZCTPEFICIMBX3GBNI.jpg"),
-                ImageForList(link = "https://cloudfront-us-east-1.images.arcpublishing.com/gruporepublica/3SJFG4PNVZCTPEFICIMBX3GBNI.jpg"),
-                ImageForList(link = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAOx2RPl8fc_NYxNNpuFM26XqTphDKOrVVzw&usqp=CAU"),
-                ImageForList(link = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAOx2RPl8fc_NYxNNpuFM26XqTphDKOrVVzw&usqp=CAU"),
-                ImageForList(link = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_SBzlRLLwDLMkPqQpgiwwAXru6zTv9TgllJBx1YtV3K7Em9AZ1maJ9PbmLKxwZxEcTWw&usqp=CAU"),
-            ).toMutableList()
-
         //create and setup Profile adapter
         binding.listImagesProfile.adapter = adapterProfile
-        adapterProfile.submitList(listImagesForProfile)
         binding.listImagesProfile.suppressLayout(true)
 
         //create and setup Moments adapter
         binding.momentsRv.adapter = adapterMoments
-        adapterMoments.submitList(listImagesForMoments)
 
         //create and setup chronicies adapter
         binding.chroniciesRv.adapter = adapterChronices
         binding.chroniciesRv.isVerticalFadingEdgeEnabled = true
-        adapterChronices.submitList(listImagesForChronicies)
         binding.chroniciesRv.suppressLayout(true)
     }
 }
