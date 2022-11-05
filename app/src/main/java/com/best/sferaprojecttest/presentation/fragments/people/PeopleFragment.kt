@@ -53,6 +53,7 @@ class PeopleFragment(
         val faker = Faker()
         val newList = (0..40).map { index ->
             PeopleInfo(
+                id=index,
                 title = faker.name.name(),
                 imageLink = getLink(id = index),
                 action = getAction(id = (1..2).random())

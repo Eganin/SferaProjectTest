@@ -23,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_margin"
+        app:layout_constraintEnd_toStartOf="@id/people_action_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/people_image_iv"
         app:layout_constraintTop_toTopOf="parent"

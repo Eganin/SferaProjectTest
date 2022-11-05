@@ -1,5 +1,7 @@
 package com.best.sferaprojecttest.presentation.fragments.people.adapters
 
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +12,7 @@ import com.best.sferaprojecttest.R
 import com.best.sferaprojecttest.databinding.PeoplleViewHolderBinding
 import com.best.sferaprojecttest.domain.models.PeopleInfo
 import com.best.sferaprojecttest.presentation.fragments.util.PeopleInfoDiffUtilCallback
+import com.best.sferaprojecttest.presentation.fragments.util.PeopleInfoDiffUtilCallback.Companion.ARG_ACTION
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 
@@ -21,6 +24,19 @@ class PeopleAdapter(private val glide: RequestManager) :
         private val changeState: ChangeStateToActionButton
     ) :
         RecyclerView.ViewHolder(binding.root) {
+
+        fun update(bundle: Bundle) {
+            if (bundle.containsKey(ARG_ACTION)) {
+                when (bundle.getString(ARG_ACTION)) {
+                    PeopleInfo.PeopleAction.SUBSCRIBE.name -> {
+                        changeState.changeStateToActive(itemView = itemView)
+                    }
+                    PeopleInfo.PeopleAction.UNSUBSCRIBE.name -> {
+                        changeState.changeStateToInactive(itemView = itemView)
+                    }
+                }
+            }
+        }
 
         fun bind(item: PeopleInfo) {
             glide
@@ -65,7 +81,17 @@ class PeopleAdapter(private val glide: RequestManager) :
         )
     }
 
+    override fun onBindViewHolder(holder: PeopleViewHolder, position: Int, payloads: List<Any>) {
+        val item = getItem(position)
+        if (payloads.isEmpty() || payloads.first() !is Bundle) {
+            holder.bind(item = item)
+        } else {
+            val bundle = payloads.first() as Bundle
+            holder.update(bundle = bundle)
+        }
+    }
+
     override fun onBindViewHolder(holder: PeopleViewHolder, position: Int) {
-        holder.bind(item = getItem(position))
+        onBindViewHolder(holder = holder, position = position, payloads = emptyList())
     }
 }
