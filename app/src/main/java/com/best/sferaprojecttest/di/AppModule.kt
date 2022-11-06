@@ -29,20 +29,4 @@ object AppModule {
             .placeholder(R.drawable.ic_image)
             .error(R.drawable.ic_image)
     )
-
-    @Singleton
-    @Provides
-    fun provideProfileAdapter(glide: RequestManager) = ProfileImagesAdapter(glide = glide)
-
-    @Singleton
-    @Provides
-    fun provideMomentsAdapter(glide: RequestManager) = MomentsAdapter(glide = glide)
-
-    @Singleton
-    @Provides
-    fun provideChroniciesAdapter(glide: RequestManager) = ChroniciesAdapter(glide = glide)
-
-    @Singleton
-    @Provides
-    fun providePeopleAdapter(glide: RequestManager) = PeopleAdapter(glide = glide)
 }

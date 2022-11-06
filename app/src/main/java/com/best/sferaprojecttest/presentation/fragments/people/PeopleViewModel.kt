@@ -1,18 +1,21 @@
 package com.best.sferaprojecttest.presentation.fragments.people
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.best.sferaprojecttest.domain.models.PeopleInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.serpro69.kfaker.Faker
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class PeopleViewModel @Inject constructor() : ViewModel() {
 
     private val _subscribersInfo = MutableLiveData<List<PeopleInfo>>()
-    val subscribesInfo: LiveData<List<PeopleInfo>> = _subscribersInfo
+    val subscribersInfo: LiveData<List<PeopleInfo>> = _subscribersInfo
 
     private val _subscriptionsInfo = MutableLiveData<List<PeopleInfo>>()
     val subscriptionsInfo: LiveData<List<PeopleInfo>> = _subscriptionsInfo
@@ -21,42 +24,43 @@ class PeopleViewModel @Inject constructor() : ViewModel() {
     val mutuallyInfo: LiveData<List<PeopleInfo>> = _mutuallyInfo
 
     fun init() {
-        val faker = Faker()
-        val subscriptions = mutableListOf<PeopleInfo>()
-        val subscribers = mutableListOf<PeopleInfo>()
-        val mutually = mutableListOf<PeopleInfo>()
-        (0..40).map { index ->
-            when (index) {
-                in 0..12 -> subscribers.add(
-                    PeopleInfo(
-                        id = index,
-                        title = faker.name.name(),
-                        imageLink = getLink(id = index),
-                        action = getAction(id = (1..2).random())
+        viewModelScope.launch {
+            val faker = Faker()
+            val subscriptions = mutableListOf<PeopleInfo>()
+            val subscribers = mutableListOf<PeopleInfo>()
+            val mutually = mutableListOf<PeopleInfo>()
+            (0..40).map { index ->
+                when (index) {
+                    in 0..12 -> subscribers.add(
+                        PeopleInfo(
+                            id = index,
+                            title = faker.name.name(),
+                            imageLink = getLink(id = index),
+                            action = getAction(id = (1..2).random())
+                        )
                     )
-                )
-                in 13..26 -> subscriptions.add(
-                    PeopleInfo(
-                        id = index,
-                        title = faker.name.name(),
-                        imageLink = getLink(id = index),
-                        action = PeopleInfo.PeopleAction.UNSUBSCRIBE
+                    in 13..26 -> subscriptions.add(
+                        PeopleInfo(
+                            id = index,
+                            title = faker.name.name(),
+                            imageLink = getLink(id = index),
+                            action = PeopleInfo.PeopleAction.UNSUBSCRIBE
+                        )
                     )
-                )
-                else -> mutually.add(
-                    PeopleInfo(
-                        id = index,
-                        title = faker.name.name(),
-                        imageLink = getLink(id = index),
-                        action = PeopleInfo.PeopleAction.UNSUBSCRIBE
+                    else -> mutually.add(
+                        PeopleInfo(
+                            id = index,
+                            title = faker.name.name(),
+                            imageLink = getLink(id = index),
+                            action = PeopleInfo.PeopleAction.UNSUBSCRIBE
+                        )
                     )
-                )
+                }
             }
+            _subscriptionsInfo.postValue(subscriptions)
+            _subscribersInfo.postValue(subscribers)
+            _mutuallyInfo.postValue(mutually)
         }
-
-        _subscriptionsInfo.postValue(subscriptions)
-        _subscribersInfo.postValue(subscribers)
-        _mutuallyInfo.postValue(mutually)
     }
 
     private fun getAction(id: Int) = when (id) {

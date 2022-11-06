@@ -12,21 +12,21 @@ import com.bumptech.glide.RequestManager
 import javax.inject.Inject
 
 class SferaFragmentFactory @Inject constructor(
-    private val adapterProfile: ProfileImagesAdapter,
-    private val adapterMoments: MomentsAdapter,
-    private val adapterChronices: ChroniciesAdapter,
-    private val peopleAdapter: PeopleAdapter,
     private val glide: RequestManager
 ) : FragmentFactory() {
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         return when (className) {
             ProfileFragment::class.java.name -> ProfileFragment(
-                adapterProfile = adapterProfile,
-                adapterMoments = adapterMoments,
-                adapterChronices = adapterChronices,
+                adapterProfile = ProfileImagesAdapter(glide = glide),
+                adapterMoments = MomentsAdapter(glide = glide),
+                adapterChronices = ChroniciesAdapter(glide = glide),
                 glide = glide
             )
-            PeopleViewPagerFragment::class.java.name -> PeopleViewPagerFragment(peopleAdapter = peopleAdapter)
+            PeopleViewPagerFragment::class.java.name -> PeopleViewPagerFragment(
+                peopleAdapterOne = PeopleAdapter(glide = glide),
+                peopleAdapterTwo = PeopleAdapter(glide = glide),
+                peopleAdapterThree = PeopleAdapter(glide = glide)
+            )
             else -> super.instantiate(classLoader, className)
         }
     }

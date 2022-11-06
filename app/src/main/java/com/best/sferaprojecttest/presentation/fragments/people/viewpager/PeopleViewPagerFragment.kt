@@ -14,12 +14,16 @@ import com.best.sferaprojecttest.presentation.routing.Router
 import com.best.sferaprojecttest.presentation.screens.MainActivity
 import com.google.android.material.tabs.TabLayoutMediator
 
-class PeopleViewPagerFragment(private val peopleAdapter: PeopleAdapter) : Fragment() {
+class PeopleViewPagerFragment(
+    private val peopleAdapterOne: PeopleAdapter,
+    private val peopleAdapterTwo: PeopleAdapter,
+    private val peopleAdapterThree: PeopleAdapter,
+) : Fragment() {
     private var _binding: PeopleViewPagerBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewPagerAdapter: ViewPagerAdapter
     private var listener: Router? = null
-    private val viewModel :PeopleViewModel by viewModels()
+    private val viewModel: PeopleViewModel by viewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -44,16 +48,20 @@ class PeopleViewPagerFragment(private val peopleAdapter: PeopleAdapter) : Fragme
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
-        viewPagerAdapter = ViewPagerAdapter(peopleAdapter = peopleAdapter, fragment = this)
+        viewModel.init()
+        viewPagerAdapter =
+            ViewPagerAdapter(
+                peopleAdapterOne,
+                peopleAdapterTwo,
+                peopleAdapterThree,
+                fragment = this,
+                viewModel = viewModel
+            )
         binding.pager.adapter = viewPagerAdapter
         val tabsList = listOf("SUBSCRIBERS", "SUBSCRIPTIONS", "MUTUALLY")
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
             tab.text = tabsList[position]
         }.attach()
-    }
-
-    private fun observeData(){
-        viewModel
     }
 
     private fun setupListeners() {
