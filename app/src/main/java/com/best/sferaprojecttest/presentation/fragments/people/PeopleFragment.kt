@@ -33,31 +33,36 @@ class PeopleFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("EEE",type.name)
         setupRecyclerView()
+
     }
+
+
+    override fun onResume() {
+        super.onResume()
+        when (type) {
+            TypePeopleList.SUBSCRIBERS -> viewModel.changePositionForViewPager(position = 0)
+            TypePeopleList.SUBSCRIPTIONS -> viewModel.changePositionForViewPager(position = 1)
+            TypePeopleList.MUTUALLY -> viewModel.changePositionForViewPager(position = 2)
+        }
+    }
+
 
     private fun setupRecyclerView() {
         binding.peoplesRv.adapter = peopleAdapter
         when (type) {
             TypePeopleList.SUBSCRIBERS -> {
                 viewModel.subscribersInfo.observe(viewLifecycleOwner) {
-                    Log.d("EEE", "1")
-                    Log.d("EEE", it.toString())
                     peopleAdapter.submitList(it)
                 }
             }
             TypePeopleList.SUBSCRIPTIONS -> {
                 viewModel.subscriptionsInfo.observe(viewLifecycleOwner) {
-                    Log.d("EEE", "2")
-                    Log.d("EEE", it.toString())
                     peopleAdapter.submitList(it)
                 }
             }
             TypePeopleList.MUTUALLY -> {
                 viewModel.mutuallyInfo.observe(viewLifecycleOwner) {
-                    Log.d("EEE", "3")
-                    Log.d("EEE", it.toString())
                     peopleAdapter.submitList(it)
                 }
             }

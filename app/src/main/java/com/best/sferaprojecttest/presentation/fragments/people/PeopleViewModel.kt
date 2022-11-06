@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.best.sferaprojecttest.domain.models.PeopleInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.serpro69.kfaker.Faker
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,42 +24,90 @@ class PeopleViewModel @Inject constructor() : ViewModel() {
     private val _mutuallyInfo = MutableLiveData<List<PeopleInfo>>()
     val mutuallyInfo: LiveData<List<PeopleInfo>> = _mutuallyInfo
 
-    fun init() {
+    private var currentViewPagerPosition = 0
+
+    fun changePositionForViewPager(position: Int) {
+        currentViewPagerPosition = position
+    }
+
+    fun filterList(filterNickName: String) {
         viewModelScope.launch {
-            val faker = Faker()
-            val subscriptions = mutableListOf<PeopleInfo>()
-            val subscribers = mutableListOf<PeopleInfo>()
-            val mutually = mutableListOf<PeopleInfo>()
-            (0..40).map { index ->
-                when (index) {
-                    in 0..12 -> subscribers.add(
-                        PeopleInfo(
-                            id = index,
-                            title = faker.name.name(),
-                            imageLink = getLink(id = index),
-                            action = getAction(id = (1..2).random())
+            Log.d("EEE", currentViewPagerPosition.toString())
+            when (currentViewPagerPosition) {
+                0 -> {
+                    _subscribersInfo.postValue(generateList().first.filter {
+                        it.title.lowercase().contains(
+                            filterNickName.lowercase()
                         )
-                    )
-                    in 13..26 -> subscriptions.add(
-                        PeopleInfo(
-                            id = index,
-                            title = faker.name.name(),
-                            imageLink = getLink(id = index),
-                            action = PeopleInfo.PeopleAction.UNSUBSCRIBE
+                    })
+                }
+                1 -> {
+                    _subscriptionsInfo.postValue(generateList().second.filter {
+                        it.title.lowercase().contains(
+                            filterNickName.lowercase()
                         )
-                    )
-                    else -> mutually.add(
-                        PeopleInfo(
-                            id = index,
-                            title = faker.name.name(),
-                            imageLink = getLink(id = index),
-                            action = PeopleInfo.PeopleAction.UNSUBSCRIBE
+                    })
+                }
+                else -> {
+                    _mutuallyInfo.postValue(generateList().third.filter {
+                        it.title.lowercase().contains(
+                            filterNickName.lowercase()
                         )
-                    )
+                    })
                 }
             }
-            _subscriptionsInfo.postValue(subscriptions)
+        }
+    }
+
+    private fun generateList(): Triple<List<PeopleInfo>, List<PeopleInfo>, List<PeopleInfo>> {
+        val faker = Faker()
+        val subscriptions = mutableListOf<PeopleInfo>()
+        val subscribers = mutableListOf<PeopleInfo>()
+        val mutually = mutableListOf<PeopleInfo>()
+        (0..40).map { index ->
+            when (index) {
+                in 0..12 -> subscribers.add(
+                    PeopleInfo(
+                        id = index,
+                        title = faker.name.name(),
+                        imageLink = getLink(id = index),
+                        action = getAction(id = (1..2).random())
+                    )
+                )
+                in 13..26 -> subscriptions.add(
+                    PeopleInfo(
+                        id = index,
+                        title = faker.name.name(),
+                        imageLink = getLink(id = index),
+                        action = PeopleInfo.PeopleAction.UNSUBSCRIBE
+                    )
+                )
+                else -> mutually.add(
+                    PeopleInfo(
+                        id = index,
+                        title = faker.name.name(),
+                        imageLink = getLink(id = index),
+                        action = PeopleInfo.PeopleAction.UNSUBSCRIBE
+                    )
+                )
+            }
+        }
+
+        return Triple(
+            first = subscribers,
+            second = subscriptions,
+            third = mutually
+        )
+    }
+
+    fun init() {
+        viewModelScope.launch {
+            val generatedList = generateList()
+            val subscribers = generatedList.first
+            val subscriptions = generatedList.second
+            val mutually = generatedList.third
             _subscribersInfo.postValue(subscribers)
+            _subscriptionsInfo.postValue(subscriptions)
             _mutuallyInfo.postValue(mutually)
         }
     }

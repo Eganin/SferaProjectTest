@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/toolbar_people_background"
-        app:menu="@menu/people_top_app__bar_menu"
+        app:menu="@menu/people_top_app_bar_menu"
         app:navigationIcon="@drawable/back_icon"
         app:title="@string/people_title"
         app:titleTextAppearance="@style/TitleStyle" />

@@ -2,11 +2,11 @@ package com.best.sferaprojecttest.presentation.fragments.people.viewpager
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.best.sferaprojecttest.R
 import com.best.sferaprojecttest.databinding.PeopleViewPagerBinding
 import com.best.sferaprojecttest.presentation.fragments.people.PeopleViewModel
 import com.best.sferaprojecttest.presentation.fragments.people.adapters.PeopleAdapter
@@ -45,6 +45,7 @@ class PeopleViewPagerFragment(
         listener = null
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
@@ -67,6 +68,25 @@ class PeopleViewPagerFragment(
     private fun setupListeners() {
         binding.peopleToolbar.topAppBar.setNavigationOnClickListener {
             listener?.openProfileFragment()
+        }
+        binding.peopleToolbar.topAppBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.search_people -> {
+                    val searchView = it.actionView as SearchView
+                    searchView.queryHint="Enter nickname"
+                    searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+                        override fun onQueryTextSubmit(query: String?): Boolean {
+                            return false
+                        }
+
+                        override fun onQueryTextChange(newText: String?): Boolean {
+                            viewModel.filterList(filterNickName = newText.toString())
+                            return false
+                        }
+                    })
+                }
+            }
+            true
         }
     }
 }
