@@ -2,6 +2,8 @@ package com.best.sferaprojecttest.di
 
 import android.content.Context
 import com.best.sferaprojecttest.R
+import com.best.sferaprojecttest.domain.repository.ProfileRepository
+import com.best.sferaprojecttest.domain.usecases.*
 import com.best.sferaprojecttest.presentation.fragments.people.adapters.PeopleAdapter
 import com.best.sferaprojecttest.presentation.fragments.profile.adapters.ChroniciesAdapter
 import com.best.sferaprojecttest.presentation.fragments.profile.adapters.MomentsAdapter
@@ -29,4 +31,16 @@ object AppModule {
             .placeholder(R.drawable.ic_image)
             .error(R.drawable.ic_image)
     )
+
+    @Singleton
+    @Provides
+    fun provideUseCases(repository: ProfileRepository): SferaUseCases {
+        return SferaUseCases(
+            getPeoplesInfo = GetPeopleInfo(repository = repository),
+            getProfileInfo = GetProfileInfo(repository = repository),
+            getProfileImages = GetProfileImages(repository = repository),
+            getMoments = GetMoments(repository = repository),
+            getChronicies = GetChronicies(repository = repository)
+        )
+    }
 }

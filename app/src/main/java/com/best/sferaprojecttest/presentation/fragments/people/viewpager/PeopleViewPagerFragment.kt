@@ -13,7 +13,9 @@ import com.best.sferaprojecttest.presentation.fragments.people.adapters.PeopleAd
 import com.best.sferaprojecttest.presentation.routing.Router
 import com.best.sferaprojecttest.presentation.screens.MainActivity
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PeopleViewPagerFragment(
     private val peopleAdapterOne: PeopleAdapter,
     private val peopleAdapterTwo: PeopleAdapter,

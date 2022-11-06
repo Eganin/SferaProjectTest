@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.best.sferaprojecttest.domain.models.PeopleInfo
+import com.best.sferaprojecttest.domain.usecases.SferaUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.delay
@@ -13,7 +14,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PeopleViewModel @Inject constructor() : ViewModel() {
+class PeopleViewModel @Inject constructor(
+    private val sferaUseCases: SferaUseCases
+) : ViewModel() {
+
+    private lateinit var peoplesList: Triple<List<PeopleInfo>, List<PeopleInfo>, List<PeopleInfo>>
 
     private val _subscribersInfo = MutableLiveData<List<PeopleInfo>>()
     val subscribersInfo: LiveData<List<PeopleInfo>> = _subscribersInfo
@@ -35,21 +40,21 @@ class PeopleViewModel @Inject constructor() : ViewModel() {
             Log.d("EEE", currentViewPagerPosition.toString())
             when (currentViewPagerPosition) {
                 0 -> {
-                    _subscribersInfo.postValue(generateList().first.filter {
+                    _subscribersInfo.postValue(peoplesList.first.filter {
                         it.title.lowercase().contains(
                             filterNickName.lowercase()
                         )
                     })
                 }
                 1 -> {
-                    _subscriptionsInfo.postValue(generateList().second.filter {
+                    _subscriptionsInfo.postValue(peoplesList.second.filter {
                         it.title.lowercase().contains(
                             filterNickName.lowercase()
                         )
                     })
                 }
                 else -> {
-                    _mutuallyInfo.postValue(generateList().third.filter {
+                    _mutuallyInfo.postValue(peoplesList.third.filter {
                         it.title.lowercase().contains(
                             filterNickName.lowercase()
                         )
@@ -59,74 +64,17 @@ class PeopleViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    private fun generateList(): Triple<List<PeopleInfo>, List<PeopleInfo>, List<PeopleInfo>> {
-        val faker = Faker()
-        val subscriptions = mutableListOf<PeopleInfo>()
-        val subscribers = mutableListOf<PeopleInfo>()
-        val mutually = mutableListOf<PeopleInfo>()
-        (0..40).map { index ->
-            when (index) {
-                in 0..12 -> subscribers.add(
-                    PeopleInfo(
-                        id = index,
-                        title = faker.name.name(),
-                        imageLink = getLink(id = index),
-                        action = getAction(id = (1..2).random())
-                    )
-                )
-                in 13..26 -> subscriptions.add(
-                    PeopleInfo(
-                        id = index,
-                        title = faker.name.name(),
-                        imageLink = getLink(id = index),
-                        action = PeopleInfo.PeopleAction.UNSUBSCRIBE
-                    )
-                )
-                else -> mutually.add(
-                    PeopleInfo(
-                        id = index,
-                        title = faker.name.name(),
-                        imageLink = getLink(id = index),
-                        action = PeopleInfo.PeopleAction.UNSUBSCRIBE
-                    )
-                )
-            }
-        }
-
-        return Triple(
-            first = subscribers,
-            second = subscriptions,
-            third = mutually
-        )
-    }
-
     fun init() {
         viewModelScope.launch {
-            val generatedList = generateList()
-            val subscribers = generatedList.first
-            val subscriptions = generatedList.second
-            val mutually = generatedList.third
-            _subscribersInfo.postValue(subscribers)
-            _subscriptionsInfo.postValue(subscriptions)
-            _mutuallyInfo.postValue(mutually)
+            sferaUseCases.getPeoplesInfo().collect {
+                peoplesList = it
+                Log.d("EEE",it.first.toString())
+                Log.d("EEE",it.second.toString())
+                Log.d("EEE",it.third.toString())
+            }
+            _subscribersInfo.postValue(peoplesList.first ?: emptyList())
+            _subscriptionsInfo.postValue(peoplesList.second ?: emptyList())
+            _mutuallyInfo.postValue(peoplesList.third ?: emptyList())
         }
-    }
-
-    private fun getAction(id: Int) = when (id) {
-        1 -> PeopleInfo.PeopleAction.SUBSCRIBE
-        else -> PeopleInfo.PeopleAction.UNSUBSCRIBE
-    }
-
-    private fun getLink(id: Int) = when {
-        id % 3 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/3/3d/Sasha_Blouse_character_image.png/revision/latest?cb=20180215193834"
-        id % 5 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/1/18/Erwin_Smith_character_image.png/revision/latest/scale-to-width-down/350?cb=20190514212751"
-        id % 7 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/9/91/Petra_Ral_character_image.png/revision/latest/scale-to-width-down/350?cb=20190824104211"
-        id % 11 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/7/7b/Porco_Galliard_character_image.png/revision/latest/scale-to-width-down/350?cb=20190410154154"
-        id % 13 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/0/02/Bertolt_Hoover_character_image.png/revision/latest/scale-to-width-down/350?cb=20190717190848"
-        id % 17 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/9/9f/Historia_Reiss_character_image.png/revision/latest/scale-to-width-down/350?cb=20210411172422"
-        id % 19 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/f/f7/Mikasa_Ackerman_character_image.png/revision/latest/scale-to-width-down/350?cb=20210410131531"
-        id % 23 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/0/0f/Reiner_Braun_character_image.png/revision/latest/scale-to-width-down/350?cb=20190710044204"
-        id % 29 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/6/69/Eren_Yeager_character_image.png/revision/latest/scale-to-width-down/350?cb=20200910221354"
-        else -> "https://static.wikia.nocookie.net/shingekinokyojin/images/9/94/Levi_Ackerman_character_image.png/revision/latest?cb=20210410135001"
     }
 }
