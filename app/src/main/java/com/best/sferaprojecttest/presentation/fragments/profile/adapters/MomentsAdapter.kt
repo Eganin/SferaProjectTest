@@ -9,14 +9,11 @@ import com.best.sferaprojecttest.databinding.AddViewHolderMomentsBinding
 import com.best.sferaprojecttest.databinding.ImageForMomentsBinding
 import com.best.sferaprojecttest.domain.models.ImageForList
 import com.best.sferaprojecttest.presentation.fragments.util.ImageForListDiffUtilCallback
-import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
-import javax.inject.Inject
 
 class MomentsAdapter (
     private val glide: RequestManager
-) :
-    ListAdapter<ImageForList, MomentsAdapter.MomentViewHolder>(ImageForListDiffUtilCallback()) {
+) : ListAdapter<ImageForList, MomentsAdapter.MomentViewHolder>(ImageForListDiffUtilCallback()) {
 
     companion object {
         private const val TYPE_ADD = 0

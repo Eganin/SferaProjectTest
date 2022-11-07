@@ -6,6 +6,7 @@
         android:id="@+id/search_people"
         android:icon="@drawable/search_icon"
         android:title="@string/search"
+        android:textAppearance="@style/TitleStyle"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView" />
 

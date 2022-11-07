@@ -18,10 +18,11 @@
         app:tabIndicatorAnimationMode="linear"
         app:tabIndicatorColor="@color/secondary_color"
         app:tabIndicatorFullWidth="true"
-        app:tabTextAppearance="@style/TabTitle"
         app:tabIndicatorHeight="2dp"
         app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/secondary_color" />
+        app:tabSelectedTextColor="@color/secondary_color"
+        app:tabTextAppearance="@style/TabTitle"
+        app:tabTextColor="@color/inactive_color" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager"

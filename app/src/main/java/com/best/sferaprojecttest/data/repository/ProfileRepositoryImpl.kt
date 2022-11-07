@@ -1,6 +1,5 @@
 package com.best.sferaprojecttest.data.repository
 
-import com.best.sferaprojecttest.data.util.DefaultDispatchers
 import com.best.sferaprojecttest.domain.models.ImageForList
 import com.best.sferaprojecttest.domain.models.PeopleInfo
 import com.best.sferaprojecttest.domain.models.ProfileInfo
@@ -8,17 +7,14 @@ import com.best.sferaprojecttest.domain.repository.ProfileRepository
 import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class ProfileRepositoryImpl @Inject constructor() : ProfileRepository {
-    private val dispatchers: DefaultDispatchers = DefaultDispatchers.Base()
 
     override fun fetchPeoplesInfo(): Flow<Triple<List<PeopleInfo>, List<PeopleInfo>, List<PeopleInfo>>> {
         return flow {
             emit(generateList())
-        }.flowOn(dispatchers.io())
+        }
     }
 
     override fun fetchProfileInfo(): Flow<ProfileInfo> {
@@ -33,7 +29,7 @@ class ProfileRepositoryImpl @Inject constructor() : ProfileRepository {
                     geolocations = "Paradise"
                 )
             )
-        }.flowOn(dispatchers.io())
+        }
     }
 
     override fun fetchProfileImages(): Flow<List<ImageForList>> {
@@ -46,7 +42,7 @@ class ProfileRepositoryImpl @Inject constructor() : ProfileRepository {
                     ImageForList(link = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_SBzlRLLwDLMkPqQpgiwwAXru6zTv9TgllJBx1YtV3K7Em9AZ1maJ9PbmLKxwZxEcTWw&usqp=CAU"),
                 )
             )
-        }.flowOn(dispatchers.io())
+        }
     }
 
     override fun fetchMoments(): Flow<List<ImageForList>> {
@@ -60,7 +56,7 @@ class ProfileRepositoryImpl @Inject constructor() : ProfileRepository {
                     ImageForList(link = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_SBzlRLLwDLMkPqQpgiwwAXru6zTv9TgllJBx1YtV3K7Em9AZ1maJ9PbmLKxwZxEcTWw&usqp=CAU"),
                 )
             )
-        }.flowOn(dispatchers.io())
+        }
     }
 
     override fun fetchChronicies(): Flow<List<ImageForList>> {
@@ -80,7 +76,7 @@ class ProfileRepositoryImpl @Inject constructor() : ProfileRepository {
                     ImageForList(link = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_SBzlRLLwDLMkPqQpgiwwAXru6zTv9TgllJBx1YtV3K7Em9AZ1maJ9PbmLKxwZxEcTWw&usqp=CAU"),
                 )
             )
-        }.flowOn(dispatchers.io())
+        }
     }
 
     private fun generateList(): Triple<List<PeopleInfo>, List<PeopleInfo>, List<PeopleInfo>> {

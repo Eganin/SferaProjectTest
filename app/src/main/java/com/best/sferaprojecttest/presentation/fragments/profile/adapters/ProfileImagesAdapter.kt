@@ -1,5 +1,6 @@
 package com.best.sferaprojecttest.presentation.fragments.profile.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -30,6 +31,7 @@ class ProfileImagesAdapter (
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageForProfileViewHolder {
+
         val binding =
             ImageForProfileBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ImageForProfileViewHolder(binding = binding)

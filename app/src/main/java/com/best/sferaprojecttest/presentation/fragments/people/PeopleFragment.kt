@@ -11,16 +11,18 @@ import com.best.sferaprojecttest.databinding.PeopleFragmentBinding
 import com.best.sferaprojecttest.domain.models.PeopleInfo
 import com.best.sferaprojecttest.presentation.fragments.people.adapters.PeopleAdapter
 import com.best.sferaprojecttest.presentation.fragments.people.viewpager.TypePeopleList
+import com.bumptech.glide.RequestManager
 import io.github.serpro69.kfaker.Faker
 
 class PeopleFragment(
-    private val peopleAdapter: PeopleAdapter,
     private val type: TypePeopleList,
-    private val viewModel: PeopleViewModel
-) : Fragment() {
+    private val viewModel: PeopleViewModel,
+    private val glide: RequestManager
+) : Fragment(){
 
     private var _binding: PeopleFragmentBinding? = null
     private val binding get() = _binding!!
+    private lateinit var peopleAdapter: PeopleAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +38,6 @@ class PeopleFragment(
         setupRecyclerView()
     }
 
-
     override fun onResume() {
         super.onResume()
         when (type) {
@@ -48,6 +49,7 @@ class PeopleFragment(
 
 
     private fun setupRecyclerView() {
+        peopleAdapter = PeopleAdapter(glide = glide, type = type)
         binding.peoplesRv.adapter = peopleAdapter
         when (type) {
             TypePeopleList.SUBSCRIBERS -> {
@@ -63,6 +65,7 @@ class PeopleFragment(
             TypePeopleList.MUTUALLY -> {
                 viewModel.mutuallyInfo.observe(viewLifecycleOwner) {
                     peopleAdapter.submitList(it)
+                    Log.d("EEE",it.size.toString())
                 }
             }
         }

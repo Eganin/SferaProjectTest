@@ -22,11 +22,7 @@ class SferaFragmentFactory @Inject constructor(
                 adapterChronices = ChroniciesAdapter(glide = glide),
                 glide = glide
             )
-            PeopleViewPagerFragment::class.java.name -> PeopleViewPagerFragment(
-                peopleAdapterOne = PeopleAdapter(glide = glide),
-                peopleAdapterTwo = PeopleAdapter(glide = glide),
-                peopleAdapterThree = PeopleAdapter(glide = glide)
-            )
+            PeopleViewPagerFragment::class.java.name -> PeopleViewPagerFragment(glide = glide)
             else -> super.instantiate(classLoader, className)
         }
     }

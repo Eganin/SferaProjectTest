@@ -18,11 +18,17 @@
         tools:src="@drawable/profile_image" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        app:layout_constrainedWidth="true"
+        app:layout_constraintHorizontal_weight="1"
         android:id="@+id/people_nickname"
         style="@style/PeopleTitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="1dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintEnd_toStartOf="@id/people_action_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/people_image_iv"

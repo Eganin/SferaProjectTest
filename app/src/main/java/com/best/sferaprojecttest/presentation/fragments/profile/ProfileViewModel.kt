@@ -8,6 +8,8 @@ import com.best.sferaprojecttest.domain.models.ImageForList
 import com.best.sferaprojecttest.domain.models.ProfileInfo
 import com.best.sferaprojecttest.domain.usecases.SferaUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.toCollection
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,22 +32,22 @@ class ProfileViewModel @Inject constructor(
 
     fun init() {
         viewModelScope.launch {
-            useCases.getProfileInfo().collect {
-                _profileInfo.postValue(it)
+
+            useCases.getChronicies().collect {
+                _imagesForChronicies.postValue(it)
             }
 
             useCases.getProfileImages().collect {
                 _imagesForProfile.postValue(it)
             }
 
+            useCases.getProfileInfo().collect {
+                _profileInfo.postValue(it)
+            }
+
             useCases.getMoments().collect {
                 _imagesForMoments.postValue(it)
             }
-
-            useCases.getChronicies().collect {
-                _imagesForChronicies.postValue(it)
-            }
-
         }
     }
 }

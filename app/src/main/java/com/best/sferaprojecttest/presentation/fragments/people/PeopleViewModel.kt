@@ -8,8 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.best.sferaprojecttest.domain.models.PeopleInfo
 import com.best.sferaprojecttest.domain.usecases.SferaUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.github.serpro69.kfaker.Faker
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -35,9 +33,17 @@ class PeopleViewModel @Inject constructor(
         currentViewPagerPosition = position
     }
 
+    fun updateList(item: PeopleInfo) {
+        _subscriptionsInfo.postValue(peoplesList.second.toMutableList().also {
+            it.remove(item)
+        })
+        _mutuallyInfo.postValue(peoplesList.third.toMutableList().also {
+            it.remove(item)
+        })
+    }
+
     fun filterList(filterNickName: String) {
         viewModelScope.launch {
-            Log.d("EEE", currentViewPagerPosition.toString())
             when (currentViewPagerPosition) {
                 0 -> {
                     _subscribersInfo.postValue(peoplesList.first.filter {
@@ -68,13 +74,11 @@ class PeopleViewModel @Inject constructor(
         viewModelScope.launch {
             sferaUseCases.getPeoplesInfo().collect {
                 peoplesList = it
-                Log.d("EEE",it.first.toString())
-                Log.d("EEE",it.second.toString())
-                Log.d("EEE",it.third.toString())
             }
             _subscribersInfo.postValue(peoplesList.first ?: emptyList())
             _subscriptionsInfo.postValue(peoplesList.second ?: emptyList())
             _mutuallyInfo.postValue(peoplesList.third ?: emptyList())
+
         }
     }
 }

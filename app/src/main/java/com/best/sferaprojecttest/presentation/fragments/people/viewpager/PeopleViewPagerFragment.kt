@@ -12,14 +12,13 @@ import com.best.sferaprojecttest.presentation.fragments.people.PeopleViewModel
 import com.best.sferaprojecttest.presentation.fragments.people.adapters.PeopleAdapter
 import com.best.sferaprojecttest.presentation.routing.Router
 import com.best.sferaprojecttest.presentation.screens.MainActivity
+import com.bumptech.glide.RequestManager
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PeopleViewPagerFragment(
-    private val peopleAdapterOne: PeopleAdapter,
-    private val peopleAdapterTwo: PeopleAdapter,
-    private val peopleAdapterThree: PeopleAdapter,
+    private val glide: RequestManager
 ) : Fragment() {
     private var _binding: PeopleViewPagerBinding? = null
     private val binding get() = _binding!!
@@ -54,14 +53,16 @@ class PeopleViewPagerFragment(
         viewModel.init()
         viewPagerAdapter =
             ViewPagerAdapter(
-                peopleAdapterOne,
-                peopleAdapterTwo,
-                peopleAdapterThree,
+                glide=glide,
                 fragment = this,
                 viewModel = viewModel
             )
         binding.pager.adapter = viewPagerAdapter
-        val tabsList = listOf("SUBSCRIBERS", "SUBSCRIPTIONS", "MUTUALLY")
+        val tabsList = listOf(
+            getString(R.string.subscribers_tab),
+            getString(R.string.subscriptions_tab),
+            getString(R.string.mutually_tab)
+        )
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
             tab.text = tabsList[position]
         }.attach()
@@ -75,8 +76,8 @@ class PeopleViewPagerFragment(
             when (it.itemId) {
                 R.id.search_people -> {
                     val searchView = it.actionView as SearchView
-                    searchView.queryHint="Enter nickname"
-                    searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+                    searchView.queryHint = context?.getString(R.string.search)
+                    searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                         override fun onQueryTextSubmit(query: String?): Boolean {
                             return false
                         }
