@@ -12,12 +12,14 @@ import androidx.fragment.app.viewModels
 import com.best.sferaprojecttest.R
 import com.best.sferaprojecttest.databinding.ProfileFragmentBinding
 import com.best.sferaprojecttest.domain.models.ProfileInfo
+import com.best.sferaprojecttest.presentation.fragments.UiState
 import com.best.sferaprojecttest.presentation.fragments.profile.adapters.ChroniciesAdapter
 import com.best.sferaprojecttest.presentation.fragments.profile.adapters.MomentsAdapter
 import com.best.sferaprojecttest.presentation.fragments.profile.adapters.ProfileImagesAdapter
 import com.best.sferaprojecttest.presentation.routing.Router
 import com.best.sferaprojecttest.presentation.screens.MainActivity
 import com.bumptech.glide.RequestManager
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -68,6 +70,19 @@ class ProfileFragment(
         }
         profileViewModel.imagesForChronicies.observe(viewLifecycleOwner) {
             adapterChronices.submitList(it)
+        }
+
+        profileViewModel.uiState.observe(viewLifecycleOwner) {
+            when (it) {
+                is UiState.HideLoading -> binding.profileProgressBar.visibility = View.GONE
+
+                is UiState.ShowLoading ->
+                    binding.profileProgressBar.visibility = View.VISIBLE
+
+                is UiState.ShowError ->
+                    Snackbar.make(binding.root, it.message, Snackbar.LENGTH_SHORT).show()
+
+            }
         }
     }
 

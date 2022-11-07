@@ -1,12 +1,13 @@
 package com.best.sferaprojecttest.presentation.fragments.people
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.best.sferaprojecttest.domain.models.PeopleInfo
 import com.best.sferaprojecttest.domain.usecases.SferaUseCases
+import com.best.sferaprojecttest.domain.util.Resource
+import com.best.sferaprojecttest.presentation.fragments.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,6 +18,9 @@ class PeopleViewModel @Inject constructor(
 ) : ViewModel() {
 
     private lateinit var peoplesList: Triple<List<PeopleInfo>, List<PeopleInfo>, List<PeopleInfo>>
+
+    private val _uiState = MutableLiveData<UiState>()
+    val uiState: LiveData<UiState> = _uiState
 
     private val _subscribersInfo = MutableLiveData<List<PeopleInfo>>()
     val subscribersInfo: LiveData<List<PeopleInfo>> = _subscribersInfo
@@ -31,15 +35,6 @@ class PeopleViewModel @Inject constructor(
 
     fun changePositionForViewPager(position: Int) {
         currentViewPagerPosition = position
-    }
-
-    fun updateList(item: PeopleInfo) {
-        _subscriptionsInfo.postValue(peoplesList.second.toMutableList().also {
-            it.remove(item)
-        })
-        _mutuallyInfo.postValue(peoplesList.third.toMutableList().also {
-            it.remove(item)
-        })
     }
 
     fun filterList(filterNickName: String) {
@@ -72,13 +67,39 @@ class PeopleViewModel @Inject constructor(
 
     fun init() {
         viewModelScope.launch {
-            sferaUseCases.getPeoplesInfo().collect {
-                peoplesList = it
+            sferaUseCases.getPeoplesInfo().collect { result ->
+                wrapperForHandlerResource(result = result) {
+                    peoplesList = it
+                }
             }
             _subscribersInfo.postValue(peoplesList.first ?: emptyList())
             _subscriptionsInfo.postValue(peoplesList.second ?: emptyList())
             _mutuallyInfo.postValue(peoplesList.third ?: emptyList())
 
+        }
+    }
+
+    private fun <T> wrapperForHandlerResource(
+        result: Resource<T>,
+        onStateChangeSuccess: (T) -> Unit
+    ) {
+        when (result) {
+            is Resource.Success -> {
+                result.data?.let {
+                    _uiState.postValue(UiState.HideLoading)
+                    onStateChangeSuccess(it)
+                }
+            }
+
+            is Resource.Error -> {
+                result.message?.let {
+                    _uiState.postValue(UiState.ShowError(message = it))
+                }
+            }
+
+            is Resource.Loading -> {
+                _uiState.postValue(UiState.ShowLoading)
+            }
         }
     }
 }

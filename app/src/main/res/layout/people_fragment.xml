@@ -7,6 +7,13 @@
     android:background="@color/background_color"
     android:orientation="vertical">
 
+    <ProgressBar
+        android:id="@+id/people_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/peoples_rv"
         android:layout_width="match_parent"

@@ -1,9 +1,11 @@
 package com.best.sferaprojecttest.data.repository
 
+import com.best.sferaprojecttest.data.util.DefaultDispatchers
 import com.best.sferaprojecttest.domain.models.ImageForList
 import com.best.sferaprojecttest.domain.models.PeopleInfo
 import com.best.sferaprojecttest.domain.models.ProfileInfo
 import com.best.sferaprojecttest.domain.repository.ProfileRepository
+import com.best.sferaprojecttest.domain.util.Resource
 import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -11,15 +13,19 @@ import javax.inject.Inject
 
 class ProfileRepositoryImpl @Inject constructor() : ProfileRepository {
 
-    override fun fetchPeoplesInfo(): Flow<Triple<List<PeopleInfo>, List<PeopleInfo>, List<PeopleInfo>>> {
+    private val dispatchers: DefaultDispatchers = DefaultDispatchers.Base()
+
+    override fun fetchPeoplesInfo(): Flow<Resource<Triple<List<PeopleInfo>, List<PeopleInfo>, List<PeopleInfo>>>> {
         return flow {
-            emit(generateList())
+            bodyForDataLoading(dispatchers) {
+                generateList()
+            }
         }
     }
 
-    override fun fetchProfileInfo(): Flow<ProfileInfo> {
+    override fun fetchProfileInfo(): Flow<Resource<ProfileInfo>> {
         return flow {
-            emit(
+            bodyForDataLoading(dispatchers) {
                 ProfileInfo(
                     avatarLink = "https://i.pinimg.com/736x/7e/ce/c4/7ecec434137d1fcbe023db38e06c1260.jpg",
                     rating = 5.0,
@@ -28,26 +34,26 @@ class ProfileRepositoryImpl @Inject constructor() : ProfileRepository {
                     languages = "English, Japanese",
                     geolocations = "Paradise"
                 )
-            )
+            }
         }
     }
 
-    override fun fetchProfileImages(): Flow<List<ImageForList>> {
+    override fun fetchProfileImages(): Flow<Resource<List<ImageForList>>> {
         return flow {
-            emit(
+            bodyForDataLoading(dispatchers) {
                 listOf(
                     ImageForList(link = "https://i.pinimg.com/736x/7e/ce/c4/7ecec434137d1fcbe023db38e06c1260.jpg"),
                     ImageForList(link = "https://cloudfront-us-east-1.images.arcpublishing.com/gruporepublica/3SJFG4PNVZCTPEFICIMBX3GBNI.jpg"),
                     ImageForList(link = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAOx2RPl8fc_NYxNNpuFM26XqTphDKOrVVzw&usqp=CAU"),
                     ImageForList(link = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_SBzlRLLwDLMkPqQpgiwwAXru6zTv9TgllJBx1YtV3K7Em9AZ1maJ9PbmLKxwZxEcTWw&usqp=CAU"),
                 )
-            )
+            }
         }
     }
 
-    override fun fetchMoments(): Flow<List<ImageForList>> {
+    override fun fetchMoments(): Flow<Resource<List<ImageForList>>> {
         return flow {
-            emit(
+            bodyForDataLoading(dispatchers) {
                 listOf(
                     ImageForList(link = "https://i.pinimg.com/736x/7e/ce/c4/7ecec434137d1fcbe023db38e06c1260.jpg"),
                     ImageForList(link = "https://cloudfront-us-east-1.images.arcpublishing.com/gruporepublica/3SJFG4PNVZCTPEFICIMBX3GBNI.jpg"),
@@ -55,13 +61,13 @@ class ProfileRepositoryImpl @Inject constructor() : ProfileRepository {
                     ImageForList(link = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAOx2RPl8fc_NYxNNpuFM26XqTphDKOrVVzw&usqp=CAU"),
                     ImageForList(link = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_SBzlRLLwDLMkPqQpgiwwAXru6zTv9TgllJBx1YtV3K7Em9AZ1maJ9PbmLKxwZxEcTWw&usqp=CAU"),
                 )
-            )
+            }
         }
     }
 
-    override fun fetchChronicies(): Flow<List<ImageForList>> {
+    override fun fetchChronicies(): Flow<Resource<List<ImageForList>>> {
         return flow {
-            emit(
+            bodyForDataLoading(dispatchers) {
                 listOf(
                     ImageForList(link = "https://i.pinimg.com/736x/7e/ce/c4/7ecec434137d1fcbe023db38e06c1260.jpg"),
                     ImageForList(link = "https://i.pinimg.com/736x/7e/ce/c4/7ecec434137d1fcbe023db38e06c1260.jpg"),
@@ -75,7 +81,7 @@ class ProfileRepositoryImpl @Inject constructor() : ProfileRepository {
                     ImageForList(link = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAOx2RPl8fc_NYxNNpuFM26XqTphDKOrVVzw&usqp=CAU"),
                     ImageForList(link = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_SBzlRLLwDLMkPqQpgiwwAXru6zTv9TgllJBx1YtV3K7Em9AZ1maJ9PbmLKxwZxEcTWw&usqp=CAU"),
                 )
-            )
+            }
         }
     }
 

@@ -112,7 +112,5 @@ class PeopleAdapter(
         val myCurrentList = currentList.toMutableList()
         myCurrentList.removeAt(position)
         submitList(myCurrentList)
-        Log.d("EEE",position.toString())
-        //notifyItemRemoved(position)
     }
 }
