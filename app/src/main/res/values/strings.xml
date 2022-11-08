@@ -19,4 +19,9 @@
     <string name="people_title">People</string>
     <string name="subscribe_text">Subscribe</string>
     <string name="unsubscribe_text">Unsubscribe</string>
+    <string name="search">Search</string>
+    <string name="cleaning">Cleaning</string>
+    <string name="subscribers_tab">SUBSCRIBERS</string>
+    <string name="subscriptions_tab">SUBSCRIPTIONS</string>
+    <string name="mutually_tab">MUTUALLY</string>
 </resources>

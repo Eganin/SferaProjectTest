@@ -1,6 +1,5 @@
 package com.best.sferaprojecttest.presentation.fragments.people
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,25 +7,25 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.best.sferaprojecttest.databinding.PeopleFragmentBinding
 import com.best.sferaprojecttest.domain.models.PeopleInfo
+import com.best.sferaprojecttest.presentation.fragments.UiState
 import com.best.sferaprojecttest.presentation.fragments.people.adapters.PeopleAdapter
-import com.best.sferaprojecttest.presentation.routing.Router
-import com.best.sferaprojecttest.presentation.screens.MainActivity
-import io.github.serpro69.kfaker.Faker
+import com.best.sferaprojecttest.presentation.fragments.people.viewpager.TypePeopleList
+import com.bumptech.glide.RequestManager
+import com.google.android.material.snackbar.Snackbar
+
+interface ChangePeopleList{
+    fun removeItemInList(item: PeopleInfo)
+}
 
 class PeopleFragment(
-    private val peopleAdapter: PeopleAdapter
-) : Fragment() {
+    private val type: TypePeopleList,
+    private val viewModel: PeopleViewModel,
+    private val glide: RequestManager
+) : Fragment(),ChangePeopleList {
 
     private var _binding: PeopleFragmentBinding? = null
     private val binding get() = _binding!!
-    private var listener: Router? = null
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is MainActivity) {
-            listener = context
-        }
-    }
+    private lateinit var peopleAdapter: PeopleAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,44 +38,53 @@ class PeopleFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupListeners()
         setupRecyclerView()
     }
 
-    private fun setupListeners() {
-        binding.peopleToolbar.topAppBar.setNavigationOnClickListener {
-            listener?.openProfileFragment()
+    override fun onResume() {
+        super.onResume()
+        when (type) {
+            TypePeopleList.SUBSCRIBERS -> viewModel.changePositionForViewPager(position = 0)
+            TypePeopleList.SUBSCRIPTIONS -> viewModel.changePositionForViewPager(position = 1)
+            TypePeopleList.MUTUALLY -> viewModel.changePositionForViewPager(position = 2)
         }
     }
+
 
     private fun setupRecyclerView() {
-        val faker = Faker()
-        val newList = (0..40).map { index ->
-            PeopleInfo(
-                title = faker.name.name(),
-                imageLink = getLink(id = index),
-                action = getAction(id = (1..2).random())
-            )
-        }
+        peopleAdapter = PeopleAdapter(glide = glide, type = type, listener = this)
         binding.peoplesRv.adapter = peopleAdapter
-        peopleAdapter.submitList(newList)
+        viewModel.uiState.observe(viewLifecycleOwner) {
+            when (it) {
+                is UiState.HideLoading -> binding.peopleProgressBar.visibility = View.GONE
+
+                is UiState.ShowLoading -> binding.peopleProgressBar.visibility = View.VISIBLE
+
+                is UiState.ShowError ->
+                    Snackbar.make(binding.root, it.message, Snackbar.LENGTH_SHORT).show()
+
+            }
+        }
+        when (type) {
+            TypePeopleList.SUBSCRIBERS -> {
+                viewModel.subscribersInfo.observe(viewLifecycleOwner) {
+                    peopleAdapter.submitList(it)
+                }
+            }
+            TypePeopleList.SUBSCRIPTIONS -> {
+                viewModel.subscriptionsInfo.observe(viewLifecycleOwner) {
+                    peopleAdapter.submitList(it)
+                }
+            }
+            TypePeopleList.MUTUALLY -> {
+                viewModel.mutuallyInfo.observe(viewLifecycleOwner) {
+                    peopleAdapter.submitList(it)
+                }
+            }
+        }
     }
 
-    private fun getAction(id: Int) = when (id) {
-        1 -> PeopleInfo.PeopleAction.SUBSCRIBE
-        else -> PeopleInfo.PeopleAction.UNSUBSCRIBE
-    }
-
-    private fun getLink(id: Int) = when {
-        id % 3 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/3/3d/Sasha_Blouse_character_image.png/revision/latest?cb=20180215193834"
-        id % 5 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/1/18/Erwin_Smith_character_image.png/revision/latest/scale-to-width-down/350?cb=20190514212751"
-        id % 7 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/9/91/Petra_Ral_character_image.png/revision/latest/scale-to-width-down/350?cb=20190824104211"
-        id % 11 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/7/7b/Porco_Galliard_character_image.png/revision/latest/scale-to-width-down/350?cb=20190410154154"
-        id % 13 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/0/02/Bertolt_Hoover_character_image.png/revision/latest/scale-to-width-down/350?cb=20190717190848"
-        id % 17 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/9/9f/Historia_Reiss_character_image.png/revision/latest/scale-to-width-down/350?cb=20210411172422"
-        id % 19 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/f/f7/Mikasa_Ackerman_character_image.png/revision/latest/scale-to-width-down/350?cb=20210410131531"
-        id % 23 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/0/0f/Reiner_Braun_character_image.png/revision/latest/scale-to-width-down/350?cb=20190710044204"
-        id % 29 == 0 -> "https://static.wikia.nocookie.net/shingekinokyojin/images/6/69/Eren_Yeager_character_image.png/revision/latest/scale-to-width-down/350?cb=20200910221354"
-        else -> "https://static.wikia.nocookie.net/shingekinokyojin/images/9/94/Levi_Ackerman_character_image.png/revision/latest?cb=20210410135001"
+    override fun removeItemInList(item: PeopleInfo) {
+        viewModel.updateList(peopleInfo = item)
     }
 }

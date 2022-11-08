@@ -11,8 +11,9 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/black</item>
-        <item name="android:textColor">@color/on_primary_color</item>
         <!-- Customize your theme here. -->
         <item name="colorOnBackground">@color/on_primary_color</item>
+        <item name="searchViewStyle">@style/SearchViewMy</item>
+        <item name="android:textColor">@color/on_primary_color</item>
     </style>
 </resources>

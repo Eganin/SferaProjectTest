@@ -2,6 +2,8 @@ package com.best.sferaprojecttest.di
 
 import android.content.Context
 import com.best.sferaprojecttest.R
+import com.best.sferaprojecttest.domain.repository.ProfileRepository
+import com.best.sferaprojecttest.domain.usecases.*
 import com.best.sferaprojecttest.presentation.fragments.people.adapters.PeopleAdapter
 import com.best.sferaprojecttest.presentation.fragments.profile.adapters.ChroniciesAdapter
 import com.best.sferaprojecttest.presentation.fragments.profile.adapters.MomentsAdapter
@@ -32,17 +34,14 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideProfileAdapter(glide: RequestManager) = ProfileImagesAdapter(glide = glide)
-
-    @Singleton
-    @Provides
-    fun provideMomentsAdapter(glide: RequestManager) = MomentsAdapter(glide = glide)
-
-    @Singleton
-    @Provides
-    fun provideChroniciesAdapter(glide: RequestManager) = ChroniciesAdapter(glide = glide)
-
-    @Singleton
-    @Provides
-    fun providePeopleAdapter(glide: RequestManager) = PeopleAdapter(glide = glide)
+    fun provideUseCases(repository: ProfileRepository): SferaUseCases {
+        return SferaUseCases(
+            getPeoplesInfo = GetPeopleInfo(repository = repository),
+            getProfileInfo = GetProfileInfo(repository = repository),
+            getProfileImages = GetProfileImages(repository = repository),
+            getMoments = GetMoments(repository = repository),
+            getChronicies = GetChronicies(repository = repository),
+            updatePeopleInfoAndGetPeoplesInfo = UpdatePeopleInfoAndGetPeoplesInfo(repository = repository)
+        )
+    }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="TitleStyle">
         <item name="android:fontFamily">@font/inter_medium</item>
         <item name="android:letterSpacing">-0.03</item>
@@ -78,5 +79,17 @@
 
     <style name="TextInputLayoutTheme">
         <item name="colorControlActivated">@color/secondary_color</item>
+    </style>
+
+    <style name="TabTitle">
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#99FFFFFF</item>
+        <item name="android:lineSpacingExtra">-1sp</item>
+    </style>
+
+    <style name="SearchViewMy" parent="Widget.AppCompat.SearchView.ActionBar">
+        <item name="searchHintIcon">@null</item>
+        <item name="searchIcon">@null</item>
     </style>
 </resources>

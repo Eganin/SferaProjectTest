@@ -25,9 +25,9 @@ class MainActivity : AppCompatActivity(), Router {
         window.statusBarColor = ContextCompat.getColor(this, R.color.black)
     }
 
-    override fun openPeopleFragment() {
+    override fun openPeopleViewPagerFragment() {
         openNewFragment {
-            navigate(R.id.action_profileFragment_to_peopleFragment)
+            navigate(R.id.action_profileFragment_to_peopleViewPagerFragment)
         }
     }
 

@@ -7,9 +7,12 @@
     android:background="@color/background_color"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/people_toolbar"
-        layout="@layout/toolbar_people" />
+    <ProgressBar
+        android:id="@+id/people_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/peoples_rv"

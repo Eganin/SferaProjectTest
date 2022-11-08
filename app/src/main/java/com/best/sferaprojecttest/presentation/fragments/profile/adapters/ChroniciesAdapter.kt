@@ -1,5 +1,6 @@
 package com.best.sferaprojecttest.presentation.fragments.profile.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +16,7 @@ import javax.inject.Inject
 
 class ChroniciesAdapter (
     private val glide: RequestManager
-) :
-    ListAdapter<ImageForList, ChroniciesAdapter.ChroniciesViewHolder>(ImageForListDiffUtilCallback()) {
+) : ListAdapter<ImageForList, ChroniciesAdapter.ChroniciesViewHolder>(ImageForListDiffUtilCallback()) {
 
     companion object {
         private const val TYPE_ADD = 0
