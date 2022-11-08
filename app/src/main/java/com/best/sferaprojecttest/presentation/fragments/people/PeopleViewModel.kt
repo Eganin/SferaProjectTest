@@ -1,5 +1,6 @@
 package com.best.sferaprojecttest.presentation.fragments.people
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +10,7 @@ import com.best.sferaprojecttest.domain.usecases.SferaUseCases
 import com.best.sferaprojecttest.domain.util.Resource
 import com.best.sferaprojecttest.presentation.fragments.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,7 +19,7 @@ class PeopleViewModel @Inject constructor(
     private val sferaUseCases: SferaUseCases
 ) : ViewModel() {
 
-    private lateinit var peoplesList: Triple<List<PeopleInfo>, List<PeopleInfo>, List<PeopleInfo>>
+    private var peoplesList: Triple<List<PeopleInfo>, List<PeopleInfo>, List<PeopleInfo>>?= null
 
     private val _uiState = MutableLiveData<UiState>()
     val uiState: LiveData<UiState> = _uiState
@@ -37,25 +39,36 @@ class PeopleViewModel @Inject constructor(
         currentViewPagerPosition = position
     }
 
+    fun updateList(peopleInfo: PeopleInfo) {
+        viewModelScope.launch {
+            sferaUseCases.updatePeopleInfoAndGetPeoplesInfo(peopleInfo = peopleInfo)
+                .collect { result ->
+                    wrapperForHandlerResource(result = result) {
+                        peoplesList = it
+                    }
+                }
+        }
+    }
+
     fun filterList(filterNickName: String) {
         viewModelScope.launch {
             when (currentViewPagerPosition) {
                 0 -> {
-                    _subscribersInfo.postValue(peoplesList.first.filter {
+                    _subscribersInfo.postValue(peoplesList?.first?.filter {
                         it.title.lowercase().contains(
                             filterNickName.lowercase()
                         )
                     })
                 }
                 1 -> {
-                    _subscriptionsInfo.postValue(peoplesList.second.filter {
+                    _subscriptionsInfo.postValue(peoplesList?.second?.filter {
                         it.title.lowercase().contains(
                             filterNickName.lowercase()
                         )
                     })
                 }
                 else -> {
-                    _mutuallyInfo.postValue(peoplesList.third.filter {
+                    _mutuallyInfo.postValue(peoplesList?.third?.filter {
                         it.title.lowercase().contains(
                             filterNickName.lowercase()
                         )
@@ -72,9 +85,9 @@ class PeopleViewModel @Inject constructor(
                     peoplesList = it
                 }
             }
-            _subscribersInfo.postValue(peoplesList.first ?: emptyList())
-            _subscriptionsInfo.postValue(peoplesList.second ?: emptyList())
-            _mutuallyInfo.postValue(peoplesList.third ?: emptyList())
+            _subscribersInfo.postValue(peoplesList?.first ?: emptyList())
+            _subscriptionsInfo.postValue(peoplesList?.second ?: emptyList())
+            _mutuallyInfo.postValue(peoplesList?.third ?: emptyList())
 
         }
     }
@@ -86,7 +99,6 @@ class PeopleViewModel @Inject constructor(
         when (result) {
             is Resource.Success -> {
                 result.data?.let {
-                    _uiState.postValue(UiState.HideLoading)
                     onStateChangeSuccess(it)
                 }
             }
@@ -98,7 +110,11 @@ class PeopleViewModel @Inject constructor(
             }
 
             is Resource.Loading -> {
-                _uiState.postValue(UiState.ShowLoading)
+                if (result.isLoading) {
+                    _uiState.postValue(UiState.ShowLoading)
+                } else {
+                    _uiState.postValue(UiState.HideLoading)
+                }
             }
         }
     }

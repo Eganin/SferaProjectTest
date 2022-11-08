@@ -71,7 +71,6 @@ class ProfileViewModel @Inject constructor(
         when (result) {
             is Resource.Success -> {
                 result.data?.let {
-                    _uiState.postValue(UiState.HideLoading)
                     onStateChangeSuccess(it)
                 }
             }
@@ -83,7 +82,11 @@ class ProfileViewModel @Inject constructor(
             }
 
             is Resource.Loading -> {
-                _uiState.postValue(UiState.ShowLoading)
+                if (result.isLoading){
+                    _uiState.postValue(UiState.ShowLoading)
+                }else{
+                    _uiState.postValue(UiState.HideLoading)
+                }
             }
         }
     }

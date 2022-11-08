@@ -2,19 +2,25 @@ package com.best.sferaprojecttest.presentation.fragments.people.viewpager
 
 import android.content.Context
 import android.os.Bundle
-import android.view.*
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.SearchView.SearchAutoComplete
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.best.sferaprojecttest.R
 import com.best.sferaprojecttest.databinding.PeopleViewPagerBinding
 import com.best.sferaprojecttest.presentation.fragments.people.PeopleViewModel
-import com.best.sferaprojecttest.presentation.fragments.people.adapters.PeopleAdapter
 import com.best.sferaprojecttest.presentation.routing.Router
 import com.best.sferaprojecttest.presentation.screens.MainActivity
 import com.bumptech.glide.RequestManager
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class PeopleViewPagerFragment(
@@ -53,7 +59,7 @@ class PeopleViewPagerFragment(
         viewModel.init()
         viewPagerAdapter =
             ViewPagerAdapter(
-                glide=glide,
+                glide = glide,
                 fragment = this,
                 viewModel = viewModel
             )
@@ -77,6 +83,26 @@ class PeopleViewPagerFragment(
                 R.id.search_people -> {
                     val searchView = it.actionView as SearchView
                     searchView.queryHint = context?.getString(R.string.search)
+                    searchView.setIconifiedByDefault(false)
+
+                    val ll = searchView.getChildAt(0) as LinearLayout
+                    val ll2 = ll.getChildAt(2) as LinearLayout
+                    val ll3 = ll2.getChildAt(1) as LinearLayout
+                    Log.d("EEE", ll3.childCount.toString())
+                    val autoComplete = ll3.getChildAt(0) as SearchAutoComplete
+                    autoComplete.setHintTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.hint_color
+                        )
+                    )
+                    autoComplete.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.on_primary_color
+                        )
+                    )
+
                     searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                         override fun onQueryTextSubmit(query: String?): Boolean {
                             return false

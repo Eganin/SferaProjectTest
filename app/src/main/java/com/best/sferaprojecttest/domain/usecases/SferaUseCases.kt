@@ -5,5 +5,6 @@ data class SferaUseCases(
     val getProfileInfo: GetProfileInfo,
     val getProfileImages: GetProfileImages,
     val getMoments: GetMoments,
-    val getChronicies: GetChronicies
+    val getChronicies: GetChronicies,
+    val updatePeopleInfoAndGetPeoplesInfo: UpdatePeopleInfoAndGetPeoplesInfo
 )

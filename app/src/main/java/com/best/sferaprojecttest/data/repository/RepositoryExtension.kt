@@ -26,7 +26,7 @@ suspend fun <T> FlowCollector<Resource<T>>.bodyForDataLoading(
         null
     } catch (e: Exception) {
         e.printStackTrace()
-        emit(Resource.Error(message = "Unknown error.Turn on Gps and restart the application"))
+        emit(Resource.Error(message = "Unknown error.Turn on restart the application"))
         null
     }
 

@@ -12,4 +12,5 @@ interface ProfileRepository {
     fun fetchProfileImages():Flow<Resource<List<ImageForList>>>
     fun fetchMoments(): Flow<Resource<List<ImageForList>>>
     fun fetchChronicies():Flow<Resource<List<ImageForList>>>
+    fun updatePeopleInfo(peopleInfo: PeopleInfo): Flow<Resource<Triple<List<PeopleInfo>, List<PeopleInfo>, List<PeopleInfo>>>>
 }

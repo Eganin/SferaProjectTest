@@ -40,7 +40,8 @@ object AppModule {
             getProfileInfo = GetProfileInfo(repository = repository),
             getProfileImages = GetProfileImages(repository = repository),
             getMoments = GetMoments(repository = repository),
-            getChronicies = GetChronicies(repository = repository)
+            getChronicies = GetChronicies(repository = repository),
+            updatePeopleInfoAndGetPeoplesInfo = UpdatePeopleInfoAndGetPeoplesInfo(repository = repository)
         )
     }
 }

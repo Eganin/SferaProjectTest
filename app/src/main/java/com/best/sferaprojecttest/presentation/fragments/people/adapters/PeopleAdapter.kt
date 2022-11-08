@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.best.sferaprojecttest.databinding.PeoplleViewHolderBinding
 import com.best.sferaprojecttest.domain.models.PeopleInfo
+import com.best.sferaprojecttest.presentation.fragments.people.ChangePeopleList
 import com.best.sferaprojecttest.presentation.fragments.people.viewpager.TypePeopleList
 import com.best.sferaprojecttest.presentation.fragments.util.PeopleInfoDiffUtilCallback
 import com.best.sferaprojecttest.presentation.fragments.util.PeopleInfoDiffUtilCallback.Companion.ARG_ACTION
@@ -19,7 +20,8 @@ interface ActionButtonClickListener {
 
 class PeopleAdapter(
     private val glide: RequestManager,
-    private val type: TypePeopleList
+    private val type: TypePeopleList,
+    private val listener: ChangePeopleList
 ) :
     ListAdapter<PeopleInfo, PeopleAdapter.PeopleViewHolder>(PeopleInfoDiffUtilCallback()),
     ActionButtonClickListener {
@@ -112,5 +114,6 @@ class PeopleAdapter(
         val myCurrentList = currentList.toMutableList()
         myCurrentList.removeAt(position)
         submitList(myCurrentList)
+        listener.removeItemInList(item=item)
     }
 }

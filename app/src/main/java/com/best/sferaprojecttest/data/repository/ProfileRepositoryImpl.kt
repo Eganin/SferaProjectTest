@@ -1,12 +1,12 @@
 package com.best.sferaprojecttest.data.repository
 
+import android.util.Log
 import com.best.sferaprojecttest.data.util.DefaultDispatchers
 import com.best.sferaprojecttest.domain.models.ImageForList
 import com.best.sferaprojecttest.domain.models.PeopleInfo
 import com.best.sferaprojecttest.domain.models.ProfileInfo
 import com.best.sferaprojecttest.domain.repository.ProfileRepository
 import com.best.sferaprojecttest.domain.util.Resource
-import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -14,6 +14,70 @@ import javax.inject.Inject
 class ProfileRepositoryImpl @Inject constructor() : ProfileRepository {
 
     private val dispatchers: DefaultDispatchers = DefaultDispatchers.Base()
+
+    private val namesList = listOf(
+        "Sasha",
+        "Levi",
+        "Eren",
+        "Armin",
+        "Falco",
+        "Gabbi",
+        "Jager",
+        "Ervin",
+        "Handgi",
+        "Rainer",
+        "Berthold",
+        "Anne",
+        "Zeek",
+        "Egor",
+        "Valera",
+        "Maksim",
+        "Vadim",
+        "Vodem",
+        "Timur",
+        "Liza",
+        "Ksuha",
+        "Nataly",
+        "Igor",
+        "Robert",
+        "Deku",
+        "Bakugo",
+        "Itadori",
+        "Sukuna",
+        "Mightu",
+        "Aleksei",
+        "Sandy",
+        "Maria",
+        "Vicotor",
+        "Mercy",
+        "Joske",
+        "Jostar",
+        "Jorno",
+        "Kaneki",
+        "Touka",
+        "Hide",
+        "Meter",
+        "Thunder"
+    )
+
+    private val peoplesList = (0..40).map { index ->
+        when (index) {
+            in 0..12 ->
+                PeopleInfo(
+                    id = index,
+                    title = namesList[index],
+                    imageLink = getLink(id = index),
+                    action = getAction(id = (1..2).random())
+                )
+            else ->
+                PeopleInfo(
+                    id = index,
+                    title = namesList[index],
+                    imageLink = getLink(id = index),
+                    action = PeopleInfo.PeopleAction.UNSUBSCRIBE
+                )
+        }
+    }.toMutableList()
 
     override fun fetchPeoplesInfo(): Flow<Resource<Triple<List<PeopleInfo>, List<PeopleInfo>, List<PeopleInfo>>>> {
         return flow {
@@ -85,40 +149,26 @@ class ProfileRepositoryImpl @Inject constructor() : ProfileRepository {
         }
     }
 
+    override fun updatePeopleInfo(peopleInfo: PeopleInfo): Flow<Resource<Triple<List<PeopleInfo>, List<PeopleInfo>, List<PeopleInfo>>>> {
+        peoplesList.remove(peopleInfo)
+        return flow {
+            bodyForDataLoading(dispatchers = dispatchers) {
+                generateList()
+            }
+        }
+    }
+
     private fun generateList(): Triple<List<PeopleInfo>, List<PeopleInfo>, List<PeopleInfo>> {
-        val faker = Faker()
         val subscriptions = mutableListOf<PeopleInfo>()
         val subscribers = mutableListOf<PeopleInfo>()
         val mutually = mutableListOf<PeopleInfo>()
-        (0..40).map { index ->
+        peoplesList.forEachIndexed { index, item ->
             when (index) {
-                in 0..12 -> subscribers.add(
-                    PeopleInfo(
-                        id = index,
-                        title = faker.name.name(),
-                        imageLink = getLink(id = index),
-                        action = getAction(id = (1..2).random())
-                    )
-                )
-                in 13..26 -> subscriptions.add(
-                    PeopleInfo(
-                        id = index,
-                        title = faker.name.name(),
-                        imageLink = getLink(id = index),
-                        action = PeopleInfo.PeopleAction.UNSUBSCRIBE
-                    )
-                )
-                else -> mutually.add(
-                    PeopleInfo(
-                        id = index,
-                        title = faker.name.name(),
-                        imageLink = getLink(id = index),
-                        action = PeopleInfo.PeopleAction.UNSUBSCRIBE
-                    )
-                )
+                in 0..12 -> subscribers.add(item)
+                in 13..36 -> subscriptions.add(item)
+                else -> mutually.add(item)
             }
         }
-
         return Triple(
             first = subscribers,
             second = subscriptions,
