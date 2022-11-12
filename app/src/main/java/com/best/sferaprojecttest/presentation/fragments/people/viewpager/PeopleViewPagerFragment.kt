@@ -21,7 +21,6 @@ import com.bumptech.glide.RequestManager
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class PeopleViewPagerFragment(
     private val glide: RequestManager
@@ -84,18 +83,19 @@ class PeopleViewPagerFragment(
                     val searchView = it.actionView as SearchView
                     searchView.queryHint = context?.getString(R.string.search)
                     searchView.setIconifiedByDefault(false)
-
+                    //find edit text in Search view
                     val ll = searchView.getChildAt(0) as LinearLayout
                     val ll2 = ll.getChildAt(2) as LinearLayout
                     val ll3 = ll2.getChildAt(1) as LinearLayout
-                    Log.d("EEE", ll3.childCount.toString())
                     val autoComplete = ll3.getChildAt(0) as SearchAutoComplete
+
                     autoComplete.setHintTextColor(
                         ContextCompat.getColor(
                             requireContext(),
                             R.color.hint_color
                         )
                     )
+
                     autoComplete.setTextColor(
                         ContextCompat.getColor(
                             requireContext(),
