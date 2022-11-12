@@ -1,5 +1,7 @@
 package com.best.sferaprojecttest.presentation.fragments.profile
 
+import android.annotation.SuppressLint
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,8 +12,7 @@ import com.best.sferaprojecttest.domain.usecases.SferaUseCases
 import com.best.sferaprojecttest.domain.util.Resource
 import com.best.sferaprojecttest.presentation.fragments.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.toCollection
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -37,6 +38,8 @@ class ProfileViewModel @Inject constructor(
 
     fun init() {
         viewModelScope.launch {
+
+            test()
 
             useCases.getChronicies().collect { result ->
                 wrapperForHandlerResource(result = result) {
@@ -64,6 +67,16 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
+    @SuppressLint("CheckResult")
+    fun test() {
+        useCases.getImageAndDescription()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                Log.d("EEE","View model")
+                Log.d("EEE",it.toString())
+            }
+    }
+
     private fun <T> wrapperForHandlerResource(
         result: Resource<T>,
         onStateChangeSuccess: (T) -> Unit
@@ -82,9 +95,9 @@ class ProfileViewModel @Inject constructor(
             }
 
             is Resource.Loading -> {
-                if (result.isLoading){
+                if (result.isLoading) {
                     _uiState.postValue(UiState.ShowLoading)
-                }else{
+                } else {
                     _uiState.postValue(UiState.HideLoading)
                 }
             }

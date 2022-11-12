@@ -37,6 +37,12 @@ class MainActivity : AppCompatActivity(), Router {
         }
     }
 
+    override fun openCharacterFragment() {
+        openNewFragment {
+            navigate(R.id.action_profileFragment_to_characterFragment)
+        }
+    }
+
     private fun openNewFragment(
         transaction: NavController.() -> Unit
     ) {
