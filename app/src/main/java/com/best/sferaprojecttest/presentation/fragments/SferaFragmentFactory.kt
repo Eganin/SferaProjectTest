@@ -8,6 +8,7 @@ import com.best.sferaprojecttest.presentation.fragments.profile.ProfileFragment
 import com.best.sferaprojecttest.presentation.fragments.profile.adapters.ChroniciesAdapter
 import com.best.sferaprojecttest.presentation.fragments.profile.adapters.MomentsAdapter
 import com.best.sferaprojecttest.presentation.fragments.profile.adapters.ProfileImagesAdapter
+import com.best.sferaprojecttest.presentation.fragments.rxjavatest.CharacterFragment
 import com.bumptech.glide.RequestManager
 import javax.inject.Inject
 
@@ -23,6 +24,7 @@ class SferaFragmentFactory @Inject constructor(
                 glide = glide
             )
             PeopleViewPagerFragment::class.java.name -> PeopleViewPagerFragment(glide = glide)
+            CharacterFragment::class.java.name -> CharacterFragment(glide=glide)
             else -> super.instantiate(classLoader, className)
         }
     }

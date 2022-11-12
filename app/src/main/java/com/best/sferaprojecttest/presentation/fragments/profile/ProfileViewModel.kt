@@ -38,9 +38,6 @@ class ProfileViewModel @Inject constructor(
 
     fun init() {
         viewModelScope.launch {
-
-            test()
-
             useCases.getChronicies().collect { result ->
                 wrapperForHandlerResource(result = result) {
                     _imagesForChronicies.postValue(it)
@@ -65,16 +62,6 @@ class ProfileViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    @SuppressLint("CheckResult")
-    fun test() {
-        useCases.getImageAndDescription()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                Log.d("EEE","View model")
-                Log.d("EEE",it.toString())
-            }
     }
 
     private fun <T> wrapperForHandlerResource(
