@@ -106,6 +106,9 @@ class ProfileFragment(
         binding.peopleBtn.setOnClickListener {
             listener?.openPeopleViewPagerFragment()
         }
+        binding.profileImageIv.setOnClickListener {
+            listener?.openCharacterFragment()
+        }
         binding.aboutMeEditText.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) binding.aboutMeTextInput.counterTextColor =
                 getColorStateList(requireContext(), R.color.secondary_color)

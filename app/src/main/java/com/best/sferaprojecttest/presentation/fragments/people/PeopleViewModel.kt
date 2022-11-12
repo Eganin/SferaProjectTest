@@ -1,6 +1,5 @@
 package com.best.sferaprojecttest.presentation.fragments.people
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,7 +9,6 @@ import com.best.sferaprojecttest.domain.usecases.SferaUseCases
 import com.best.sferaprojecttest.domain.util.Resource
 import com.best.sferaprojecttest.presentation.fragments.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

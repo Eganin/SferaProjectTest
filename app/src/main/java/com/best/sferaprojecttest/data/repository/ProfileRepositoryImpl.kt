@@ -1,6 +1,5 @@
 package com.best.sferaprojecttest.data.repository
 
-import android.util.Log
 import com.best.sferaprojecttest.data.util.DefaultDispatchers
 import com.best.sferaprojecttest.domain.models.ImageForList
 import com.best.sferaprojecttest.domain.models.PeopleInfo
@@ -165,7 +164,7 @@ class ProfileRepositoryImpl @Inject constructor() : ProfileRepository {
         peoplesList.forEachIndexed { index, item ->
             when (index) {
                 in 0..12 -> subscribers.add(item)
-                in 13..36 -> subscriptions.add(item)
+                in 13..26 -> subscriptions.add(item)
                 else -> mutually.add(item)
             }
         }

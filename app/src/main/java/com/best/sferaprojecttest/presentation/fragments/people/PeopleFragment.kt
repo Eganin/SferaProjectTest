@@ -13,7 +13,7 @@ import com.best.sferaprojecttest.presentation.fragments.people.viewpager.TypePeo
 import com.bumptech.glide.RequestManager
 import com.google.android.material.snackbar.Snackbar
 
-interface ChangePeopleList{
+interface ChangePeopleList {
     fun removeItemInList(item: PeopleInfo)
 }
 
@@ -21,7 +21,7 @@ class PeopleFragment(
     private val type: TypePeopleList,
     private val viewModel: PeopleViewModel,
     private val glide: RequestManager
-) : Fragment(),ChangePeopleList {
+) : Fragment(), ChangePeopleList {
 
     private var _binding: PeopleFragmentBinding? = null
     private val binding get() = _binding!!
@@ -62,7 +62,6 @@ class PeopleFragment(
 
                 is UiState.ShowError ->
                     Snackbar.make(binding.root, it.message, Snackbar.LENGTH_SHORT).show()
-
             }
         }
         when (type) {
